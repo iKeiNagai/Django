@@ -1,0 +1,139 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: rgb(117, 120, 141);
+    color:#f9faf8;
+    padding: 20px 20px;
+}
+
+.header2{
+    display: flex;
+    padding: 120px;
+    gap: 60px;
+}
+
+.text{
+    display: flex;
+    flex-direction:column;
+    flex: 1;
+}
+
+.text1{
+    font-size:48px;
+    font-weight: 800;
+}
+
+.text2{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.second{
+    background-color: rgb(117, 120, 141);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: baseline;
+    padding: 10px 150px 50px;
+    text-align: center;
+    color:#f9faf8;;
+}
+
+.title{
+    background-color: rgb(117, 120, 141);
+    text-align: center;
+    font-size:36px ;
+    font-weight: 800;
+    color: white;
+    padding: 50px;
+}
+
+.second img{
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    border: 10px solid black;
+}
+
+.third{
+    padding: 150px;
+    background-color: #e5e7eb;
+}
+
+.quote{
+    font-size: 36px;
+    font-style: italic;
+    color: #1f2937;
+}
+.author{
+    font-size: 25px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.fourth{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:80px 150px;
+}
+.bottom-box{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(99, 96, 96);
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.bottom-text{
+    color:#f9faf8;
+}
+
+.footer{
+    background-color: rgb(117, 120, 141);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    color:#f9faf8;
+    padding: 15px;
+}
+
+
+
+.footer img{
+    height: auto;
+    width: 25px;
+}
+
+
+button{
+    background-color: #3882f6;
+    font-weight: bold;
+    padding: 3px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    color:#f9faf8 ;
+}
+
+a{
+    text-decoration: none;
+    color:#f9faf8;
+}
+
+ul{
+    gap: 20px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    font-size: 18px;
+    
+}
+
+
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}

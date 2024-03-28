@@ -1,0 +1,15 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<h1>Organizers page</h1>
+
+{% for organizer in organizers %}
+
+<li>{{organizer.o_name}} = {{organizer.specialty}}</li>
+<p>small specialty description goes here</p>
+
+{% endfor %}
+
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<h1>Change/view page</h1>
+
+    <form method="post">
+        <h4>Insert Flower</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Flowerform }}
+        <button type="submit">submit</button>
+    </form>
+
+    <form class="post">
+        <h4>Insert Flower</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Userform }}
+        <button type="submit">submit</button>
+    </form>
+
+    <form class="post">
+        <h4>Insert Competition</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Competitionform }}
+        <button type="submit">submit</button>
+    </form>
+
+
+{% endblock %}

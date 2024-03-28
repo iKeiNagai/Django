@@ -1,0 +1,26 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<h1>Search page</h1>
+<div>
+    <form method="GET" >
+        {{filter.form}}
+        <button type="submit"> Search </button>
+    </form>
+    
+</div>
+
+<div>
+    <table>
+        {%for user in users%}
+        <tr>
+            <td>{{user.u_name}} </td>  
+            <td>{{user.u_address}}</td>
+            <td>{{user.entriesno}}</td>
+            <td>update</td>
+            <td>remove</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

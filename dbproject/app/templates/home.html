@@ -1,0 +1,36 @@
+{% load static %} <!--needed for the static folder-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href=""/>
+        <title> FLOWERS PAGE</title>
+        <link rel="stylesheet" href="{% static 'home.css' %}"> <!--searches the static folder for the file-->
+    </head>
+    <body>
+        
+        <div class="header">
+            <h3>Horticultural Competition</h3>
+            <ul>
+                <a href="{% url 'home' %}"><li>Home</li></a>
+                <a href="{% url 'organizers' %}"><li>Organizers</li></a>
+                <a href="{% url 'search' %}"><li>Search</li></a>
+                <a href="{% url 'changeview' %}"><li>Change/View</li></a>
+                <a href="{% url 'pflowers' %}"><li>Popular flowers</li></a>
+                <a href="{% url 'home' %}"><li>Login</li></a>
+            </ul>
+        </div>
+        
+        <div>
+            <!--Block when u extend this home file-->
+            {% block content%}
+            Home page(advance function) 
+            {% endblock %}
+        </div>
+       
+        <div class="footer"> 
+           Webpage by 
+        </div>
+    </body>
+</html>
