@@ -1,17 +1,17 @@
 ALTER TABLE organizers
 MODIFY COLUMN specialty VARCHAR(50);
 
-INSERT INTO flower (species, size, color, age) VALUES
-('species_', 12., 'color_',0 ),
-('species_1', 12.1, 'color_1',1 ),
-('species_2', 12.2, 'color_2',2 ),
-('species_3', 12.3, 'color_3',3 ),
-('species_4', 12.4, 'color_4',4 ),
-('species_5', 12.5, 'color_5',5 ),
-('species_6', 12.6, 'color_6',6 ),
-('species_7', 12.7, 'color_7',7 ),
-('species_8', 12.8, 'color_8',8 ),
-('species_9', 12.9, 'color_9',9 );
+INSERT INTO flower (u_id,species, size, color, age) VALUES
+(1,'species_', 12., 'color_',0 ),
+(1,'species_1', 12.1, 'color_1',1 ),
+(1,'species_2', 12.2, 'color_2',2 ),
+(3,'species_3', 12.3, 'color_3',3 ),
+(5,'species_4', 12.4, 'color_4',4 ),
+(6,'species_5', 12.5, 'color_5',5 ),
+(7,'species_6', 12.6, 'color_6',6 ),
+(8,'species_7', 12.7, 'color_7',7 ),
+(9,'species_8', 12.8, 'color_8',8 ),
+(10,'species_9', 12.9, 'color_9',9 );
 
 INSERT INTO organizers(o_name,specialty) VALUES
 ('name_','specialty_'),

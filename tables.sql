@@ -2,14 +2,6 @@ CREATE DATABASE APP;
 
 USE APP;
 
-CREATE TABLE Flower(
-f_id INT AUTO_INCREMENT,
-species VARCHAR(30),
-size FLOAT,
-color VARCHAR(10),
-age TINYINT,
-PRIMARY KEY(f_id)
-);
 
 CREATE TABLE Organizers(
 o_id INT AUTO_INCREMENT,
@@ -33,6 +25,19 @@ u_name VARCHAR(30),
 u_address VARCHAR(30),
 entriesNo INT,
 PRIMARY KEY(u_id)
+);
+
+CREATE TABLE Flower(
+f_id INT AUTO_INCREMENT,
+u_id INT,
+species VARCHAR(30),
+size FLOAT,
+color VARCHAR(10),
+age TINYINT,
+PRIMARY KEY(f_id),
+FOREIGN KEY(u_id) REFERENCES User(u_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE Annuals(
