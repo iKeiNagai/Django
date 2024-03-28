@@ -25,16 +25,17 @@ def organizers(request):
     return render(request,"organizers.html", {'organizers' : o_info})
 
 def changeview(request):
+    inserted = False
     form = Insertflower()
-
-    if request.method == 'post':
-        form = Insertflower(request.POST)
-        if form.is_valid():
-            form.save()
-            return render
-        
     form2 = Insertuser()
     form3 = Insertcompetition()
+
+    if request.method == 'POST':
+        form2 = Insertuser(request.POST)
+        inserted = True
+        if form2.is_valid():
+            form2.save()
+        
     context = {"Flowerform" : form,
                 "Userform" : form2, 
                 "Competitionform":form3}
