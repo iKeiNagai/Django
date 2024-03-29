@@ -1,0 +1,32 @@
+{% extends 'home.html' %}
+<!--extends home template-->
+{% block content %}
+
+<h1>Change/view page</h1>
+
+    <!--returns POST to view if enter info-->
+    <form method="POST">
+        <h4>Insert Flower</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Flowerform }} <!--flower form from context in view(return)-->
+        <button type="submit">submit</button>
+    </form>
+
+    <!--returns POST to views if enter info-->
+    <form method="POST">
+        <h4>Insert Flower</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Userform }} <!--user form from context in view(return)-->
+        <button type="submit">submit</button>
+    </form>
+
+    <!--returns POST to view if enter info-->
+    <form method="POST">
+        <h4>Insert Competition</h4>
+        {% csrf_token %} <!--security token-->
+        {{ Competitionform }}<!--Competition form from context in view(return)-->
+        <button type="submit">submit</button>
+    </form>
+
+
+{% endblock %}

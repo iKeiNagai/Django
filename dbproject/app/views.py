@@ -7,7 +7,7 @@ from .filters import thefilter
 def home(request):
     return render(request,"home.html") #render home url
 
-#Search view
+
 def user(request):
     u_info = User.objects.all() #creates user queryset(qs) 
     f_info = Flower.objects.all() #creates flower qs
@@ -19,7 +19,7 @@ def user(request):
     context = {'users' : u_info, 
                'flowers' : f_info, 
                'filter' : the_filter} #key/value to return(dictionary)
-    return render(request,"search.html",context)
+    return render(request,"user.html",context)
 
 def organizers(request):
     o_info = Organizers.objects.all() #creates organizers qs
@@ -43,7 +43,7 @@ def competitions(request):
     context = {"Flowerform" : form,
                 "Userform" : form2, 
                 "Competitionform":form3} #key/value to return(dictionary)
-    return render(request,"changeview.html",context)
+    return render(request,"competitions.html",context)
 
 def pflowers(request):
     return render(request,"pflowers.html")
