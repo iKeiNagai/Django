@@ -8,7 +8,7 @@ def home(request):
     return render(request,"home.html") #render home url
 
 #Search view
-def search(request):
+def user(request):
     u_info = User.objects.all() #creates user queryset(qs) 
     f_info = Flower.objects.all() #creates flower qs
 
@@ -26,7 +26,7 @@ def organizers(request):
     context = {'organizers' : o_info} #key/value to return(dictionary)
     return render(request,"organizers.html",context)
 
-def changeview(request):
+def competitions(request):
     inserted = False
 
     #create form objects
