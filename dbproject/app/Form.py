@@ -1,6 +1,7 @@
 from django import forms
 from .models import Flower, User, Competition
 
+#forms connected to models include all fields
 class Insertflower(forms.ModelForm):
     class Meta:
         model = Flower

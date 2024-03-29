@@ -1,10 +1,13 @@
 {% extends 'home.html' %}
+<!--extends home template-->
 
 {% block content %}
 <h1>Search page</h1>
 <div>
+
+    <!--sends GET to view if enter info-->
     <form method="GET" >
-        {{filter.form}}
+        {{filter.form}} <!--create filter from context in view(return)-->
         <button type="submit"> Search </button>
     </form>
     
@@ -12,8 +15,12 @@
 
 <div>
     <table>
+
+        <!--for loop, users from context in view(returns)-->
         {%for user in users%}
         <tr>
+
+            <!--row for every user in table-->
             <td>{{user.u_id}}</td>
             <td>{{user.u_name}} </td>  
             <td>{{user.u_address}}</td>

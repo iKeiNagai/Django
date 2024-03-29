@@ -3,42 +3,46 @@ from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition
 from .filters import thefilter
 
-# Create your views here.
+# Home view
 def home(request):
-    return render(request,"home.html")
+    return render(request,"home.html") #render home url
 
+#Search view
 def search(request):
-    u_info = User.objects.all()
-    f_info = Flower.objects.all()
+    u_info = User.objects.all() #creates user queryset(qs) 
+    f_info = Flower.objects.all() #creates flower qs
 
-    the_filter = thefilter(request.GET, queryset=u_info)
+    the_filter = thefilter(request.GET, queryset=u_info) #filters user qs from GET request
 
-    u_info = the_filter.qs
+    u_info = the_filter.qs #filtered qs from GET request
 
     context = {'users' : u_info, 
                'flowers' : f_info, 
-               'filter' : the_filter}
+               'filter' : the_filter} #key/value to return(dictionary)
     return render(request,"search.html",context)
 
 def organizers(request):
-    o_info = Organizers.objects.all()
-    return render(request,"organizers.html", {'organizers' : o_info})
+    o_info = Organizers.objects.all() #creates organizers qs
+    context = {'organizers' : o_info} #key/value to return(dictionary)
+    return render(request,"organizers.html",context)
 
 def changeview(request):
     inserted = False
-    form = Insertflower()
+
+    #create form objects
+    form = Insertflower() 
     form2 = Insertuser()
     form3 = Insertcompetition()
 
     if request.method == 'POST':
-        form2 = Insertuser(request.POST)
+        form2 = Insertuser(request.POST) #data submitted(POST request)
         inserted = True
         if form2.is_valid():
-            form2.save()
+            form2.save() #inserts to db if valid
         
     context = {"Flowerform" : form,
                 "Userform" : form2, 
-                "Competitionform":form3}
+                "Competitionform":form3} #key/value to return(dictionary)
     return render(request,"changeview.html",context)
 
 def pflowers(request):

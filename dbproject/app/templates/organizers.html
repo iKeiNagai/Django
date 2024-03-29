@@ -1,12 +1,13 @@
 {% extends 'home.html' %}
-
+<!--extends home template-->
 {% block content %}
 
 <h1>Organizers page</h1>
 
+<!--for loop, organizers from context in view(return)-->
 {% for organizer in organizers %}
 
-<li>{{organizer.o_name}} = {{organizer.specialty}}</li>
+<li>{{organizer.o_name}} = {{organizer.specialty}}</li>  <!-- list for every organizer in table-->
 <p>small specialty description goes here</p>
 
 {% endfor %}

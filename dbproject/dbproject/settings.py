@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'app'
+    'app' #app created
 
 ]
 
@@ -129,4 +129,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [BASE_DIR / "static"] #base dir is app, it reaches the static folder
+STATICFILES_DIRS = [BASE_DIR / "static"] #base dir is dbproject, it searches the static folder
