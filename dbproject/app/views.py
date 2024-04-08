@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition
-from .filters import thefilter, OrganizersFilter
+from .filters import thefilter, OrganizersFilter, CompetitionsFilter
 
 # Home view
 def home(request):
@@ -33,10 +33,11 @@ def organizers(request):
 def competitions(request):
     inserted = False
 
+    c_info = Competition.objects.all()
+    c_filter = CompetitionsFilter(request.GET, queryset=c_info)
+    c_info = c_filter.qs
     #create form objects
-    form = Insertflower() 
     form2 = Insertuser()
-    form3 = Insertcompetition()
 
     if request.method == 'POST':
         form2 = Insertuser(request.POST) #data submitted(POST request)
@@ -44,9 +45,9 @@ def competitions(request):
         if form2.is_valid():
             form2.save() #inserts to db if valid
         
-    context = {"Flowerform" : form,
-                "Userform" : form2, 
-                "Competitionform":form3} #key/value to return(dictionary)
+    context = { "Userform" : form2,
+               'filter': c_filter,
+               'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
 def pflowers(request):

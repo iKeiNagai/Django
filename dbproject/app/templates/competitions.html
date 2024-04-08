@@ -2,31 +2,33 @@
 <!--extends home template-->
 {% block content %}
 
-<h1>Change/view page</h1>
+<h1>Competitions</h1>
 
-    <!--returns POST to view if enter info-->
-    <form method="POST">
-        <h4>Insert Flower</h4>
-        {% csrf_token %} <!--security token-->
-        {{ Flowerform }} <!--flower form from context in view(return)-->
-        <button type="submit">submit</button>
+<div>
+
+    <!--sends GET to view if enter info-->
+    <form method="GET" >
+        {{filter.form}} <!--create filter from context in view(return)-->
+        <button type="submit"> Search </button>
     </form>
+    
+</div>
 
-    <!--returns POST to views if enter info-->
-    <form method="POST">
-        <h4>Insert Flower</h4>
-        {% csrf_token %} <!--security token-->
-        {{ Userform }} <!--user form from context in view(return)-->
-        <button type="submit">submit</button>
-    </form>
-
-    <!--returns POST to view if enter info-->
-    <form method="POST">
-        <h4>Insert Competition</h4>
-        {% csrf_token %} <!--security token-->
-        {{ Competitionform }}<!--Competition form from context in view(return)-->
-        <button type="submit">submit</button>
-    </form>
-
+<div>
+    <table>
+        {% for competition in competitions %}
+        <tr>
+            <td>{{competition.c_id}}</td>
+            <td>{{competition.c_name}}</td>
+            <td>{{competition.c_location}}</td>
+            <td>{{competition.c_date}}</td>
+            <td>{{competition.participantsno}}</td>
+            <td>update</td>
+            <td>delete</td>
+        </tr>
+        {% endfor %}
+        
+    </table>
+</div>
 
 {% endblock %}
