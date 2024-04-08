@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition
-from .filters import thefilter
+from .filters import thefilter, OrganizersFilter
 
 # Home view
 def home(request):
@@ -23,7 +23,11 @@ def user(request):
 
 def organizers(request):
     o_info = Organizers.objects.all() #creates organizers qs
-    context = {'organizers' : o_info} #key/value to return(dictionary)
+    o_filter = OrganizersFilter(request.GET, queryset=o_info)
+
+    o_info = o_filter.qs
+    context = {'organizers' : o_info,
+               'filter' : o_filter} #key/value to return(dictionary)
     return render(request,"organizers.html",context)
 
 def competitions(request):

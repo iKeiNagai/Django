@@ -3,14 +3,29 @@
 {% block content %}
 
 <h1>Organizers page</h1>
+<div>
 
-<!--for loop, organizers from context in view(return)-->
-{% for organizer in organizers %}
-
-<li>{{organizer.o_name}} = {{organizer.specialty}}</li>  <!-- list for every organizer in table-->
-<p>small specialty description goes here</p>
-
-{% endfor %}
-
+    <!--sends GET to view if enter info-->
+    <form method="GET" >
+        {{filter.form}} <!--create filter from context in view(return)-->
+        <button type="submit"> Search </button>
+    </form>
+    
+</div>
+<div>
+    <table>
+    <!--for loop, organizers from context in view(return)-->
+        {% for organizer in organizers %}
+        <tr>
+            <td>{{organizer.o_id}}</td>
+            <td>{{organizer.o_name}}</td>
+            <td>{{organizer.specialty}}</td>
+            <td>update</td>
+            <td>remove</td>
+            <td>entries</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
 {% endblock %}

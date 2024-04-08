@@ -1,6 +1,6 @@
 import django_filters
-from django_filters import CharFilter
-from .models import User
+from django_filters import CharFilter, NumberFilter
+from .models import User, Organizers
 
 class thefilter(django_filters.FilterSet) : #filter querysets
 
@@ -10,3 +10,9 @@ class thefilter(django_filters.FilterSet) : #filter querysets
     class Meta:
         model = User 
         fields = '__all__' #fields to filter(for form)
+
+class OrganizersFilter(django_filters.FilterSet) :
+    o_id = NumberFilter(field_name='o_id', lookup_expr="exact")
+    class Meta: 
+        model = Organizers
+        fields = '__all__'
