@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
+import random
 
 # Home view
 def home(request):
@@ -59,6 +60,10 @@ def pflowers(request):
     return render(request,"pflowers.html")
 
 def randcomp(request) :
-    comp_obj = Competition.objects.all()
-    context = {'comp' : comp_obj}
+    user_list = list(User.objects.all())
+
+    rand_items = random.sample(user_list,3)
+    print(user_list)
+    context = {'comp' : user_list,
+               'rand_items' : rand_items}
     return render(request, "randcomp.html", context)
