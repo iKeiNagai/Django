@@ -4,4 +4,11 @@
 
 <h4>RANDOM COMP</h4>
 
-{% endblock%}
+<form method="GET"></form>
+
+{%  for i in rand_items %}
+    {{i.u_id}}
+    {{i.u_name}}
+
+{% endfor %}
+{% endblock %}
