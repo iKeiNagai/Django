@@ -15,7 +15,7 @@ class Organizers(models.Model):
 #flower table 
 class Flower(models.Model):
     f_id = models.AutoField(primary_key=True)
-    theuser = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True, db_column="theuser")
+    u = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
     species = models.CharField(max_length=30, blank=True, null=True)
     size = models.FloatField(blank=True, null=True)
     color = models.CharField(max_length=10, blank=True, null=True)
