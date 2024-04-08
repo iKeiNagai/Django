@@ -27,6 +27,7 @@
             <td>{{user.entriesno}}</td>
             <td><button>update</button></td>
             <td><button>remove</button></td>
+            <td><button><a href="{% url 'entries' entry=user.u_id %}">entries</a></button></td>
         </tr>
         {% endfor %}
     </table>

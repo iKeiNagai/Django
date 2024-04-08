@@ -1,0 +1,20 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<h3>entries</h3>
+<div>
+    <table>
+        {% for entry in entries %}
+        <tr>
+            <td>{{entry.f_id}}</td>
+            <td>{{entry.species}}</td>
+            <td>{{entry.size}}</td>
+            <td>{{entry.color}}</td>
+            <td>{{entry.age}}</td>
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

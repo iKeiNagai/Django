@@ -21,6 +21,11 @@ def user(request):
                'filter' : the_filter} #key/value to return(dictionary)
     return render(request,"user.html",context)
 
+def entries(request, entry):
+    u_entry = Flower.objects.filter(u=entry) #returns qs 
+    context = {'entries' : u_entry}
+    return render(request, 'entries.html', context)
+
 def organizers(request):
     o_info = Organizers.objects.all() #creates organizers qs
     o_filter = OrganizersFilter(request.GET, queryset=o_info)
