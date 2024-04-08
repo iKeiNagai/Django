@@ -57,3 +57,8 @@ def competitions(request):
 
 def pflowers(request):
     return render(request,"pflowers.html")
+
+def randcomp(request) :
+    comp_obj = Competition.objects.all()
+    context = {'comp' : comp_obj}
+    return render(request, "randcomp.html", context)
