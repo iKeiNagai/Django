@@ -61,11 +61,15 @@ def pflowers(request):
 
 def randcomp(request) :
     form = randc()
-    print(request.GET)
     user_list = list(User.objects.all())
     list_len = len(user_list)
-    rand_items = random.sample(user_list,int(request.GET.get('PersonNo')))
-    name = request.GET.get('Name')
+
+    rand_items = random.sample(user_list,0)
+    if request.method == 'GET' :
+        personNo = request.GET.get('PersonNo')
+        if personNo is not None:
+            rand_items = random.sample(user_list,int(personNo))
+        name = request.GET.get('Name')
     context = {'comp' : user_list,
                'rand_items' : rand_items,
                'randc' : form,
