@@ -3,12 +3,23 @@
 {% block content %}
 
 <h4>RANDOM COMP</h4>
-
-<form method="GET"></form>
-
-{%  for i in rand_items %}
-    {{i.u_id}}
-    {{i.u_name}}
-
-{% endfor %}
+<div>
+    <form method="GET">
+        {% csrf_token %}
+        {{randc.as_p}}
+        <p>No more than {{len}}</p>
+        <button type="submit">submit</button>
+    </form>
+</div>
+<h1>{{compname}}</h1>
+<div>
+    <table>
+    {%  for i in rand_items %}
+        <tr>
+        <td>{{i.u_id}}</td>
+        <td>{{i.u_name}}</td>
+        </tr>
+    {% endfor %}
+</table>
+</div>
 {% endblock %}
