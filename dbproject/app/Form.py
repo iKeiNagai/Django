@@ -17,5 +17,6 @@ class Insertcompetition(forms.ModelForm):
         model = Competition
         fields = "__all__"
         
-class Dosearch(forms.Form):
-    Search = forms.CharField()
+class randc(forms.Form):
+    Name = forms.CharField(label="name")
+    PersonNo = forms.IntegerField(label="NNumber")
