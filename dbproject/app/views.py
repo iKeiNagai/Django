@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import Insertflower, Insertuser, Insertcompetition
+from .Form import Insertflower, Insertuser, Insertcompetition, randc
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
 import random
 
@@ -60,10 +60,15 @@ def pflowers(request):
     return render(request,"pflowers.html")
 
 def randcomp(request) :
+    form = randc()
+    print(request.GET)
     user_list = list(User.objects.all())
-
-    rand_items = random.sample(user_list,3)
-    print(user_list)
+    list_len = len(user_list)
+    rand_items = random.sample(user_list,int(request.GET.get('PersonNo')))
+    name = request.GET.get('Name')
     context = {'comp' : user_list,
-               'rand_items' : rand_items}
+               'rand_items' : rand_items,
+               'randc' : form,
+               'len' : list_len,
+               'compname' : name}
     return render(request, "randcomp.html", context)
