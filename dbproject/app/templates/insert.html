@@ -1,0 +1,17 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    {% if test %}
+    
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{userform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    {% else %}
+    <p>The condition is false.</p>
+    {% endif %}
+{% endblock %}
