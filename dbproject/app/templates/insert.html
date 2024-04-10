@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if test %}
+    {% if what == "insert" %}
     
         <div>
             <form method="POST">
@@ -11,7 +11,9 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-    {% else %}
-    <p>The condition is false.</p>
+    {% elif what == "Update" %}
+    <p>{{what}}</p>
+    {% elif what == "Remove" %}
+    <p></p>
     {% endif %}
 {% endblock %}
