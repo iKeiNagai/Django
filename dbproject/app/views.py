@@ -48,18 +48,22 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def insert(request):
-    test = True
-    form = Insertuser()
+def user_forms(request, what):
+    u_form = Insertuser()
+    if what == "insert" :
+        if request.method == 'POST':
+            u_form = Insertuser(request.POST) #data submitted(POST request)
+            if u_form.is_valid():
+                u_form.save() #inserts to db if valid
+                return redirect('user')
+    elif what == "update":
+        print("update")
+    elif what == "remove":
+        print("remove")
 
-    if request.method == 'POST':
-        form = Insertuser(request.POST) #data submitted(POST request)
-        inserted = True
-        if form.is_valid():
-            form.save() #inserts to db if valid
-            return redirect('user')
-    context = {'test' : test,
-               'userform' : form}
+    
+    context = {'userform' : u_form,
+               'what': what}
     return render(request,'insert.html',context)
 
 def pflowers(request):
