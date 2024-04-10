@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition, randc
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
@@ -57,6 +57,7 @@ def insert(request):
         inserted = True
         if form.is_valid():
             form.save() #inserts to db if valid
+            return redirect('user')
     context = {'test' : test,
                'userform' : form}
     return render(request,'insert.html',context)
