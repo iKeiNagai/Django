@@ -43,18 +43,23 @@ def competitions(request):
     c_filter = CompetitionsFilter(request.GET, queryset=c_info)
     c_info = c_filter.qs
     #create form objects
-    form2 = Insertuser()
-
-    if request.method == 'POST':
-        form2 = Insertuser(request.POST) #data submitted(POST request)
-        inserted = True
-        if form2.is_valid():
-            form2.save() #inserts to db if valid
         
-    context = { "Userform" : form2,
-               'filter': c_filter,
+    context = { 'filter': c_filter,
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
+
+def insert(request):
+    test = True
+    form = Insertuser()
+
+    if request.method == 'POST':
+        form = Insertuser(request.POST) #data submitted(POST request)
+        inserted = True
+        if form.is_valid():
+            form.save() #inserts to db if valid
+    context = {'test' : test,
+               'userform' : form}
+    return render(request,'insert.html',context)
 
 def pflowers(request):
     return render(request,"pflowers.html")
