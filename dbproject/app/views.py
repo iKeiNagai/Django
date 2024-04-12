@@ -48,7 +48,7 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def user_forms(request, what):
+def user_forms(request, what, page):
     u_form = Insertuser()
     if what == "insert" :
         if request.method == 'POST':
