@@ -93,7 +93,7 @@ FOREIGN KEY(c_id) REFERENCES Competition(c_id)
 CREATE TABLE enters(
 u_id INT,
 f_id INT,
-PRIMARY KEY(u_id,f_id),
+PRIMARY KEY(f_id),
 FOREIGN KEY(u_id) REFERENCES User(u_id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,

@@ -67,8 +67,8 @@ class Annuals(models.Model):
 
 #user&flower
 class Enters(models.Model):
-    u = models.ManyToManyField('User', models.DO_NOTHING, primary_key=True)  # The composite primary key (u_id, f_id) found, that is not supported. The first column is selected.
-    f = models.ForeignKey('Flower', models.DO_NOTHING)
+    u = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
+    f = models.OneToOneField('Flower', models.DO_NOTHING, primary_key=True)
 
     class Meta:
         managed = False
@@ -76,28 +76,31 @@ class Enters(models.Model):
 
 #User&competition
 class Has(models.Model):
-    u = models.ManyToManyField('User', models.DO_NOTHING, primary_key=True)  # The composite primary key (u_id, c_id) found, that is not supported. The first column is selected.
+    u = models.OneToOneField('User', models.DO_NOTHING, primary_key=True)  # The composite primary key (u_id, c_id) found, that is not supported. The first column is selected.
     c = models.ForeignKey(Competition, models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'has'
+        unique_together = (('u', 'c'),)
 
 #flower&comp
 class Participates(models.Model):
-    f = models.ManyToManyField(Flower, models.DO_NOTHING, primary_key=True)  # The composite primary key (f_id, c_id) found, that is not supported. The first column is selected.
+    f = models.OneToOneField(Flower, models.DO_NOTHING, primary_key=True)  # The composite primary key (f_id, c_id) found, that is not supported. The first column is selected.
     c = models.ForeignKey(Competition, models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'participates'
+        unique_together = (('f', 'c'),)
 
 #organizer&comp
 class Creates(models.Model):
-    o = models.ManyToManyField('Organizers', models.DO_NOTHING, primary_key=True)  # The composite primary key (o_id, c_id) found, that is not supported. The first column is selected.
+    o = models.OneToOneField('Organizers', models.DO_NOTHING, primary_key=True)  # The composite primary key (o_id, c_id) found, that is not supported. The first column is selected.
     c = models.ForeignKey(Competition, models.DO_NOTHING)
 
     class Meta:
         managed = False
         db_table = 'creates'
+        unique_together = (('o', 'c'),)
 
