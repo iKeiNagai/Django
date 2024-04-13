@@ -51,6 +51,8 @@ def competitions(request):
 def user_forms(request, what, page):
     u_form = Insertuser()
     o_form = InsertOrganizer()
+    c_form = Insertcompetition()
+
     while page == "User":
         if what == "insert" :
             if request.method == 'POST':
@@ -76,9 +78,23 @@ def user_forms(request, what, page):
         elif what == "remove":
             print("remove")
         break
+
+    while page == "Competition":
+        if what == "insert" :
+            if request.method == 'POST':
+                c_form = Insertcompetition(request.POST) #data submitted(POST request)
+                if c_form.is_valid():
+                    c_form.save() #inserts to db if valid
+                    return redirect('competitions')
+        elif what == "update":
+            print("update")
+        elif what == "remove":
+            print("remove")
+        break
     
     context = {'userform' : u_form,
                'organizerform' : o_form,
+               'competitionform' : c_form,
                'what': what,
                'page':page}
     return render(request,'insert.html',context)

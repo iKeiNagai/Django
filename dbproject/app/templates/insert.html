@@ -26,6 +26,14 @@
             </form>
         </div>
 
-    {% elif what == "Remove" %}
+    {% elif what == "insert" and page == "Competition" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{competitionform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     {% endif %}
 {% endblock %}
