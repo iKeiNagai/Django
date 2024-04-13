@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    {% if what == "insert" %}
+    {% if what == "insert" and page == "User"%}
     
         <div>
             <form method="POST">
@@ -11,9 +11,21 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+
     {% elif what == "Update" %}
     <p>{{what}}</p>
     {% elif what == "Remove" %}
-    <p></p>
+
+    {% elif what == "insert" and page == "Organizer" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{organizerform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+    {% elif what == "Remove" %}
     {% endif %}
 {% endblock %}

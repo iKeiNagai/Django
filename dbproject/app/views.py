@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals, Enters
-from .Form import Insertflower, Insertuser, Insertcompetition, randc
+from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
 import random
 
@@ -50,20 +50,37 @@ def competitions(request):
 
 def user_forms(request, what, page):
     u_form = Insertuser()
-    if what == "insert" :
-        if request.method == 'POST':
-            u_form = Insertuser(request.POST) #data submitted(POST request)
-            if u_form.is_valid():
-                u_form.save() #inserts to db if valid
-                return redirect('user')
-    elif what == "update":
-        print("update")
-    elif what == "remove":
-        print("remove")
+    o_form = InsertOrganizer()
+    while page == "User":
+        if what == "insert" :
+            if request.method == 'POST':
+                u_form = Insertuser(request.POST) #data submitted(POST request)
+                if u_form.is_valid():
+                    u_form.save() #inserts to db if valid
+                    return redirect('user')
+        elif what == "update":
+            print("update")
+        elif what == "remove":
+            print("remove")
+        break
 
+    while page == "Organizer":
+        if what == "insert" :
+            if request.method == 'POST':
+                o_form = InsertOrganizer(request.POST) #data submitted(POST request)
+                if o_form.is_valid():
+                    o_form.save() #inserts to db if valid
+                    return redirect('organizers')
+        elif what == "update":
+            print("update")
+        elif what == "remove":
+            print("remove")
+        break
     
     context = {'userform' : u_form,
-               'what': what}
+               'organizerform' : o_form,
+               'what': what,
+               'page':page}
     return render(request,'insert.html',context)
 
 def pflowers(request):
