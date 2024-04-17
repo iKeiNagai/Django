@@ -46,3 +46,18 @@ class InsertOrganizer(forms.ModelForm):
 class randc(forms.Form):
     Name = forms.CharField(label="name")
     PersonNo = forms.IntegerField(label="NNumber")
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['u_name', 'u_address', 'entriesNo']
+
+class OrganizerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Organizers
+        fields = ['o_name', 'specialty']
+
+class CompetitionUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Competition
+        fields = ['c_name', 'c_location', 'c_date']

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
+from .Form import CompetitionUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
 import random
 
@@ -152,3 +152,36 @@ def delete_object(request, obj_type, obj_id):
 def confirm_delete_user(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'confirm_delete_user.html', {'user': user})
+
+def update_user(request, u_id):
+    user = get_object_or_404(User, pk=u_id)
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('user')
+    else:
+        form = UserUpdateForm(instance=user)
+    return render(request, 'update_user.html', {'form': form})
+
+def update_organizer(request, o_id):
+    organizer = get_object_or_404(Organizers, pk=o_id)
+    if request.method == 'POST':
+        form = OrganizerUpdateForm(request.POST, instance=organizer)
+        if form.is_valid():
+            form.save()
+            return redirect('organizers')
+    else:
+        form = OrganizerUpdateForm(instance=organizer)
+    return render(request, 'update_organizer.html', {'form': form})
+
+def update_competition(request, c_id):
+    competition = get_object_or_404(Competition, pk=c_id)
+    if request.method == 'POST':
+        form = CompetitionUpdateForm(request.POST, instance=competition)
+        if form.is_valid():
+            form.save()
+            return redirect('competitions')
+    else:
+        form = CompetitionUpdateForm(instance=competition)
+    return render(request, 'update_competition.html', {'form': form})

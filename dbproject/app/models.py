@@ -40,7 +40,7 @@ class User(models.Model):
 class Competition(models.Model):
     c_id = models.AutoField(primary_key=True)
     c_name = models.CharField(max_length=50, blank=True, null=True)
-    c_location = models.CharField(max_length=30, blank=True, null=True)
+    c_location = models.CharField(max_length=50, blank=True, null=True)
     c_date = models.DateTimeField(blank=True, null=True)
     participantsno = models.SmallIntegerField(db_column='participantsNo', blank=True, null=True)  # Field name made lowercase.
 

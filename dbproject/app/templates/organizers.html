@@ -23,7 +23,9 @@
             <td>{{organizer.o_id}}</td>
             <td>{{organizer.o_name}}</td>
             <td>{{organizer.specialty}}</td>
-            <td><button>update</button></td>
+            <td><button>
+                <a href="{% url 'update_organizer' o_id=organizer.o_id %}">Update<a/>
+            </button></td>
             <td><button>
                 <a href="{% url 'delete_object' obj_type='organizers' obj_id=organizer.o_id %}">Remove</a>
             </button></td>
