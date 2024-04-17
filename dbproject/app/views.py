@@ -106,16 +106,26 @@ def randcomp(request) :
     form = randc()
     user_list = list(User.objects.all())
     list_len = len(user_list)
+    top_three = [None, None, None]
 
     rand_items = random.sample(user_list,0)
     if request.method == 'GET' :
         personNo = request.GET.get('PersonNo')
         if personNo is not None:
             rand_items = random.sample(user_list,int(personNo))
+
+            for item in rand_items:
+                for i in range(len(top_three)):
+                    if top_three[i] is None or item.entriesno>top_three[i].entriesno:
+                        top_three.insert(i, item)
+                        top_three.pop()
+                        break
+
         name = request.GET.get('Name')
     context = {'comp' : user_list,
                'rand_items' : rand_items,
                'randc' : form,
                'len' : list_len,
-               'compname' : name}
+               'compname' : name,
+               'winners' : top_three}
     return render(request, "randcomp.html", context)

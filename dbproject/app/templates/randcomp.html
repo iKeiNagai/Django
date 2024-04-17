@@ -12,14 +12,31 @@
     </form>
 </div>
 <h1>{{compname}}</h1>
+
 <div>
+    <h3>Winners</h3>
+    <table>
+    {%  for i in winners %}
+        <tr>
+        <td>{{i.u_id}}</td>
+        <td>{{i.u_name}}</td>
+        <td>{{i.u_address}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+<div></div>
+<div>
+    <h3>participants</h3>
     <table>
     {%  for i in rand_items %}
         <tr>
         <td>{{i.u_id}}</td>
         <td>{{i.u_name}}</td>
+        <td>{{i.u_address}}</td>
         </tr>
     {% endfor %}
-</table>
+    </table>
 </div>
+
 {% endblock %}
