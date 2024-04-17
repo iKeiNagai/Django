@@ -9,5 +9,6 @@ urlpatterns = [
     path('<str:page>/form/<str:what>/', views.user_forms, name='userforms'),
     path('Competitions/', views.competitions, name= "competitions"), #competition url
     path('Competitions/randcomp/', views.randcomp, name = "randcomp"),
-    path('pflowers/', views.pflowers, name= "pflowers") #popular flowers url
+    path('pflowers/', views.pflowers, name= "pflowers"), #popular flowers url
+    path('<str:obj_type>/delete/<int:obj_id>/', views.delete_object, name='delete_object'),
 ]

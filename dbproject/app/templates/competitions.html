@@ -29,7 +29,9 @@
             <td>{{competition.c_date}}</td>
             <td>{{competition.participantsno}}</td>
             <td><button>update</button></td>
-            <td><button>delete</button></td>
+            <td><button>
+                <a href="{% url 'delete_object' obj_type='competition' obj_id=competition.c_id %}">Remove</a>
+            </button></td>
         </tr>
         {% endfor %}
         

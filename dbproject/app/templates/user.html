@@ -27,8 +27,12 @@
             <td>{{user.u_name}} </td>  
             <td>{{user.u_address}}</td>
             <td>{{user.entriesno}}</td>
-            <td><button>update</button></td>
-            <td><button>remove</button></td>
+            <td>
+                <button onclick="update({{ user.u_id}})">Update</button>
+            </td>
+            <td>
+                <button><a href="{% url 'delete_object' obj_type='user' obj_id=user.u_id %}">Remove</a></button>
+            </td>
             <td><button><a href="{% url 'entries' entry=user.u_id %}">entries</a></button></td>
         </tr>
         {% endfor %}

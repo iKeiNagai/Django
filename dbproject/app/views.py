@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
@@ -129,3 +130,25 @@ def randcomp(request) :
                'compname' : name,
                'winners' : top_three}
     return render(request, "randcomp.html", context)
+
+def delete_object(request, obj_type, obj_id):
+    if obj_type == 'user':
+        obj = get_object_or_404(User, pk=obj_id)
+    elif obj_type == 'organizers':
+        obj = get_object_or_404(Organizers, pk=obj_id)
+    elif obj_type == 'competition':
+        obj = get_object_or_404(Competition, pk=obj_id)
+    else:
+        # Handle invalid object type
+        return HttpResponse("Invalid object type")
+
+    if request.method == 'POST':
+        obj.delete()
+        return redirect(obj_type)  # Redirect to appropriate page after deletion
+
+    context = {'obj': obj, 'obj_type': obj_type}
+    return render(request, 'confirm_delete.html', context)
+
+def confirm_delete_user(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    return render(request, 'confirm_delete_user.html', {'user': user})
