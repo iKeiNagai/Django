@@ -1,0 +1,23 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User Information</title>
+</head>
+<body>
+    <h1>Update User Information</h1>
+    <form method="POST" action="{% url 'update_user_form' %}">
+        {% csrf_token %}
+        <!-- Add form fields for updating user information -->
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        {{user.id}}
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="u_name"> 
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="u_address"> 
+        <button type="submit">Update</button>
+    </form>
+</body>
+</html>

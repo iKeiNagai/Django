@@ -30,7 +30,7 @@ class User(models.Model):
     u_id = models.AutoField(primary_key=True)
     u_name = models.CharField(max_length=30, blank=True, null=True)
     u_address = models.CharField(max_length=30, blank=True, null=True)
-    entriesno = models.IntegerField(db_column='entriesNo', blank=True, null=True)  # Field name made lowercase.
+    entriesNo = models.IntegerField(db_column='entriesNo', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
         managed = False
