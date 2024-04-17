@@ -15,6 +15,7 @@ class Organizers(models.Model):
 #flower table 
 class Flower(models.Model):
     f_id = models.AutoField(primary_key=True)
+    u = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
     species = models.CharField(max_length=30, blank=True, null=True)
     size = models.FloatField(blank=True, null=True)
     color = models.CharField(max_length=10, blank=True, null=True)
@@ -64,15 +65,6 @@ class Annuals(models.Model):
     class Meta:
         managed = False
         db_table = 'annuals'
-
-#user&flower
-class Enters(models.Model):
-    u = models.ForeignKey('User', models.DO_NOTHING, blank=True, null=True)
-    f = models.OneToOneField('Flower', models.DO_NOTHING, primary_key=True)
-
-    class Meta:
-        managed = False
-        db_table = 'enters'
 
 #User&competition
 class Has(models.Model):

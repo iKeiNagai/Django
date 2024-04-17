@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Organizers, Flower, User, Competition, Perennials, Annuals, Enters
+from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
 import random
@@ -23,7 +23,7 @@ def user(request):
     return render(request,"user.html",context)
 
 def entries(request, entry):
-    u_entry = Enters.objects.filter(u=entry) #returns qs 
+    u_entry = Flower.objects.filter(u=entry) #returns qs 
     context = {'entries' : u_entry}
     return render(request, 'entries.html', context)
 

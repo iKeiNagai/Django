@@ -29,11 +29,15 @@ PRIMARY KEY(u_id)
 
 CREATE TABLE Flower(
 f_id INT AUTO_INCREMENT,
+u_id INT,
 species VARCHAR(30),
 size FLOAT,
 color VARCHAR(10),
 age TINYINT,
-PRIMARY KEY(f_id)
+PRIMARY KEY(f_id),
+FOREIGN KEY(u_id) REFERENCES User(u_id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 CREATE TABLE Annuals(
@@ -90,17 +94,6 @@ FOREIGN KEY(c_id) REFERENCES Competition(c_id)
     ON UPDATE CASCADE
 );
 
-CREATE TABLE enters(
-u_id INT,
-f_id INT,
-PRIMARY KEY(f_id),
-FOREIGN KEY(u_id) REFERENCES User(u_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-FOREIGN KEY(f_id) REFERENCES Flower(f_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
-);
 
 /*
 managing databases 
