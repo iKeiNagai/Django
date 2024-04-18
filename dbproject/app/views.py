@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import CompetitionUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
 from .filters import thefilter, OrganizersFilter, CompetitionsFilter
-from fuzzywuzzy import fuzz
+
 import random
 
 # Home view
@@ -186,20 +186,3 @@ def update_competition(request, c_id):
     else:
         form = CompetitionUpdateForm(instance=competition)
     return render(request, 'update_competition.html', {'form': form})
-
-def pflowers(request):
-    if request.method == 'POST':
-        selected_color = request.POST.get('color', '')
-        # Retrieve all flowers from the database
-        flowers = Flower.objects.all()
-        # Calculate similarity scores between selected color and each flower's color
-        recommendations = []
-        for flower in flowers:
-            color_similarity = fuzz.ratio(selected_color.lower(), flower.color.lower())
-            recommendations.append((flower, color_similarity))
-        # Sort recommendations by similarity score
-        recommendations.sort(key=lambda x: x[1], reverse=True)
-        context = {'recommendations': recommendations}
-    else:
-        context = {}
-    return render(request, "pflowers.html", context)

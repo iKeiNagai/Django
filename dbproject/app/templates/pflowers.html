@@ -1,32 +1,8 @@
 {% extends 'home.html' %}
-
+<!--extends home template -->
 {% block content %}
-<h1>Flower Recommendations</h1>
-<div>
-    <!-- Display popular flowers -->
-    <h2>Recommending Flowers Based on Color</h2>
-    <ul>
-        {% for flower in flowers %}
-            <li>{{ flower.species }} ({{ flower.color }})</li>
-        {% endfor %}
-    </ul>
-</div>
-<div>
-    <!-- Recommendation form -->
-    <form method="post">
-        {% csrf_token %}
-        <label for="color">Enter a color to get flower recommendations:</label>
-        <input type="text" name="color" id="color">
-        <button type="submit">Get Recommendations</button>
-    </form>
-</div>
-<!-- Display recommendations if available -->
-{% if recommendations %}
-    <h2>Recommendations based on color similarity:</h2>
-    <ul>
-        {% for flower, similarity in recommendations %}
-            <li>{{ flower.species }} ({{ flower.color }}) - Similarity: {{ similarity }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+<h1>Popular flowers</h1>
+<br>
+
+<h1></h1>
 {% endblock %}
