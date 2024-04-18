@@ -15,4 +15,5 @@ urlpatterns = [
     path('User/update/<int:u_id>/', views.update_user, name='update_user'), #update user url
     path('Organizers/update/<int:o_id>/', views.update_organizer, name='update_organizer'), #update organizer url
     path('Competitions/update/<int:c_id>/', views.update_competition, name='update_competition'), #update compettion url
-]
+    path('update_entry/<int:entry_id>/', views.update_entry, name='update_entry'),
+]   

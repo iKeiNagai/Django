@@ -23,7 +23,7 @@
             <td>{{entry.color}}</td>
             <td>{{entry.age}}</td>
             <td><button>
-                <a href="">Update</a>
+                <a href="{% url 'update_entry' entry_id=entry.f_id %}">Update</a>
             </button></td>
             <td><button>
                 <a href="{% url 'delete_object' obj_type='entries' obj_id=entry.f_id %}">Remove</a>

@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import CompetitionUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
+from .Form import CompetitionUpdateForm, FlowerUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
 from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter
 from fuzzywuzzy import fuzz
 import random
@@ -159,13 +159,19 @@ def delete_object(request, obj_type, obj_id):
         obj = get_object_or_404(Organizers, pk=obj_id)
     elif obj_type == 'competition':
         obj = get_object_or_404(Competition, pk=obj_id)
+    elif obj_type == 'entries':  # Handle deletion of entries
+        obj = get_object_or_404(Flower, pk=obj_id)
     else:
         # Handle invalid object type
         return HttpResponse("Invalid object type")
 
     if request.method == 'POST':
+        
         obj.delete()
-        return redirect(obj_type)  # Redirect to appropriate page after deletion
+        if (obj_type=='entries'):
+            return redirect('user')
+        else:
+         return redirect(obj_type)  # Redirect to appropriate page after deletion
 
     context = {'obj': obj, 'obj_type': obj_type}
     return render(request, 'confirm_delete.html', context)
@@ -206,6 +212,17 @@ def update_competition(request, c_id):
     else:
         form = CompetitionUpdateForm(instance=competition)
     return render(request, 'update_competition.html', {'form': form})
+
+def update_entry(request, entry_id):
+    entry = get_object_or_404(Flower, pk=entry_id)
+    if request.method == 'POST':
+        form = FlowerUpdateForm(request.POST, instance=entry)
+        if form.is_valid():
+            form.save()
+            return redirect('user')  # Redirect to the entries page after updating
+    else:
+        form = FlowerUpdateForm(instance=entry)
+    return render(request, 'update_entry.html', {'form': form})
 
 def pflowers(request):
     if request.method == 'POST':

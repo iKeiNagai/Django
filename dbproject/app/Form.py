@@ -61,3 +61,8 @@ class CompetitionUpdateForm(forms.ModelForm):
     class Meta:
         model = Competition
         fields = ['c_name', 'c_location', 'c_date']
+
+class FlowerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Flower
+        fields = ['species', 'size', 'color', 'age']
