@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import CompetitionUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
-from .filters import thefilter, OrganizersFilter, CompetitionsFilter
+from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter
 from fuzzywuzzy import fuzz
 import random
 
@@ -106,7 +106,7 @@ def user_forms(request, what, page, entry=None):
                 f_form = Insertflower(request.POST) #data submitted(POST request)
                 if f_form.is_valid():
                     f_form.save() #inserts to db if valid
-                    return redirect('competitions')
+                    return redirect('entries')
         elif what == "update":
             print("update")
         elif what == "remove":
