@@ -54,7 +54,7 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def user_forms(request, what, page, entry):
+def user_forms(request, what, page, entry=None):
     u_form = Insertuser()
     o_form = InsertOrganizer()
     c_form = Insertcompetition()
