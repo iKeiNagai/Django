@@ -1,7 +1,18 @@
 {% extends 'home.html' %}
-
+<!--extends home template-->
 {% block content %}
-<h3>entries</h3>
+
+<h1>Entries</h1>
+<div>
+    <form method="GET" >
+        {{filter.form}} 
+        <button type="submit"> Search </button>
+    </form>
+    
+</div>
+<div>
+    <button><a href="{% url 'aform' page='Userentry' entry=entry what='insert' %}">Insert+</a> +</button>
+</div>
 <div>
     <table>
         {% for entry in entries %}
@@ -11,10 +22,16 @@
             <td>{{entry.size}}</td>
             <td>{{entry.color}}</td>
             <td>{{entry.age}}</td>
+            <td><button>
+                <a href="">Update</a>
+            </button></td>
+            <td><button>
+                <a href="">Remove</a>
+            </button></td>
         </tr>
-
         {% endfor %}
     </table>
 </div>
+
 
 {% endblock %}
