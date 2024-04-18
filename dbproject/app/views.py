@@ -106,7 +106,7 @@ def user_forms(request, what, page, entry=None):
                 f_form = Insertflower(request.POST) #data submitted(POST request)
                 if f_form.is_valid():
                     f_form.save() #inserts to db if valid
-                    return redirect('entries')
+                    return redirect('entries', entry=entry)
         elif what == "update":
             print("update")
         elif what == "remove":
