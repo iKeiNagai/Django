@@ -10,8 +10,8 @@ urlpatterns = [
     path('Competitions/', views.competitions, name= "competitions"), #competition url
     path('Competitions/randcomp/', views.randcomp, name = "randcomp"),
     path('pflowers/', views.pflowers, name= "pflowers"), #popular flowers url
-    path('<str:obj_type>/delete/<int:obj_id>/', views.delete_object, name='delete_object'),
-    path('User/update/<int:u_id>/', views.update_user, name='update_user'),
-    path('Organizers/update/<int:o_id>/', views.update_organizer, name='update_organizer'),
-    path('Competitions/update/<int:c_id>/', views.update_competition, name='update_competition'),
+    path('<str:obj_type>/delete/<int:obj_id>/', views.delete_object, name='delete_object'), #delete object url
+    path('User/update/<int:u_id>/', views.update_user, name='update_user'), #update user url
+    path('Organizers/update/<int:o_id>/', views.update_organizer, name='update_organizer'), #update organizer url
+    path('Competitions/update/<int:c_id>/', views.update_competition, name='update_competition'), #update compettion url
 ]
