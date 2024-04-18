@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import CharFilter, NumberFilter, ChoiceFilter
-from .models import User, Organizers, Competition
+from .models import User, Organizers, Competition, Flower
 
 class thefilter(django_filters.FilterSet) : #filter querysets
 
@@ -29,3 +29,11 @@ class CompetitionsFilter(django_filters.FilterSet) :
         fields = ['c_id',
                   'c_name',
                   'c_location']
+
+class entriesFilter(django_filters.FilterSet):
+    species = CharFilter(field_name='species', lookup_expr='icontains', label='Flower Species')
+    color = CharFilter(field_name='color',lookup_expr='exact',label='Flower Color')
+    class Meta:
+        model = Flower
+        fields = ['species',
+                  'color']
