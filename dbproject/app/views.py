@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import CompetitionUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
-from .filters import thefilter, OrganizersFilter, CompetitionsFilter
+from .filters import thefilter, OrganizersFilter, CompetitionsFilter, entriesFilter
 import random
 
 # Home view
@@ -25,7 +25,12 @@ def user(request):
 
 def entries(request, entry):
     u_entry = Flower.objects.filter(u=entry) #returns qs 
-    context = {'entries' : u_entry}
+    print(entry)
+    f_filter = entriesFilter(request.GET, queryset=u_entry)
+    u_entry = f_filter.qs
+    context = {'entries' : u_entry,
+               'filter' : f_filter,
+               'entry': entry}
     return render(request, 'entries.html', context)
 
 def organizers(request):
@@ -49,10 +54,11 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def user_forms(request, what, page):
+def user_forms(request, what, page, entry):
     u_form = Insertuser()
     o_form = InsertOrganizer()
     c_form = Insertcompetition()
+    f_form = Insertflower()
 
     while page == "User":
         if what == "insert" :
@@ -92,10 +98,24 @@ def user_forms(request, what, page):
         elif what == "remove":
             print("remove")
         break
+
+    while page == "Userentry":
+        if what == "insert" :
+            if request.method == 'POST':
+                f_form = Insertflower(request.POST) #data submitted(POST request)
+                if f_form.is_valid():
+                    f_form.save() #inserts to db if valid
+                    return redirect('competitions')
+        elif what == "update":
+            print("update")
+        elif what == "remove":
+            print("remove")
+        break
     
     context = {'userform' : u_form,
                'organizerform' : o_form,
                'competitionform' : c_form,
+               'flowerform' : f_form,
                'what': what,
                'page':page}
     return render(request,'insert.html',context)
