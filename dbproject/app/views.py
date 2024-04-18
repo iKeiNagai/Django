@@ -55,7 +55,7 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def user_forms(request, what, page, entry):
+def user_forms(request, what, page, entry=None):
     u_form = Insertuser()
     o_form = InsertOrganizer()
     c_form = Insertcompetition()
@@ -106,7 +106,7 @@ def user_forms(request, what, page, entry):
                 f_form = Insertflower(request.POST) #data submitted(POST request)
                 if f_form.is_valid():
                     f_form.save() #inserts to db if valid
-                    return redirect('competitions')
+                    return redirect('entries')
         elif what == "update":
             print("update")
         elif what == "remove":
