@@ -26,7 +26,7 @@
                 <a href="">Update</a>
             </button></td>
             <td><button>
-                <a href="">Remove</a>
+                <a href="{% url 'delete_object' obj_type='entries' obj_id=entry.f_id %}">Remove</a>
             </button></td>
         </tr>
         {% endfor %}
