@@ -1,9 +1,9 @@
 {% extends 'home.html' %}
 {% block content %}
-    <title>Confirm Delete User</title>
+    <title>Confirm Deletetion</title>
 <body>
-    <h1>Confirm Delete User</h1>
-    <p>Are you sure you want to delete user {{ user.u_name }}?</p>
+    <h1>Confirm Deletetion</h1>
+    <p>Are you sure you want to delete this entry? {{ user.u_name }}?</p>
     <form method="post">
         {% csrf_token %}
         <button type="submit">Confirm Delete</button>
