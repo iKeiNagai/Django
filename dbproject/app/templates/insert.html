@@ -12,8 +12,15 @@
             </form>
         </div>
 
-    {% elif what == "Update" %}
-    <p>{{what}}</p>
+    {% elif what == "update" and page == "User" %}
+        <h1>Update User</h1>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ userform.as_p }}
+                <button type="submit">Update</button>
+            </form>
+        </div>
     {% elif what == "Remove" %}
 
     {% elif what == "insert" and page == "Organizer" %}
@@ -23,6 +30,16 @@
                 {% csrf_token %}
                 {{organizerform.as_p}}
                 <button type="submit">Submit</button>
+            </form>
+        </div>
+    
+    {% elif what == "update" and page == "Organizer" %}
+        <h1>Update Organizer</h1>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ organizerform.as_p }}
+                <button type="submit">Update</button>
             </form>
         </div>
 
@@ -35,7 +52,17 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
-        {% elif what == "insert" and page == "Userentry" %}
+    
+    {% elif what == "update" and page == "Competition" %}
+        <h1>Update Competition</h1>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ competitionform.as_p }}
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    {% elif what == "insert" and page == "Userentry" %}
         
         <div>
             <form method="POST">
