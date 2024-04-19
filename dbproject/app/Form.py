@@ -47,6 +47,7 @@ class randc(forms.Form):
     Name = forms.CharField(label="name")
     PersonNo = forms.IntegerField(label="NNumber")
 
+
 class FlowerUpdateForm(forms.ModelForm):
     class Meta:
         model = Flower

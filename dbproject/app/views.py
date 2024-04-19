@@ -1,7 +1,8 @@
 from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import  FlowerUpdateForm, Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
+from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
 from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter
 from fuzzywuzzy import fuzz
 import random
@@ -31,7 +32,7 @@ def entries(request, entry):
     u_entry = f_filter.qs
     context = {'entries' : u_entry,
                'filter' : f_filter,
-               'entry': entry}
+               'entry' : entry}
     return render(request, 'entries.html', context)
 
 def organizers(request):
@@ -61,6 +62,7 @@ def user_forms(request, what, page, entry=None):
     c_form = Insertcompetition()
     f_form = Insertflower()
 
+    #User insert&update forms
     while page == "User":
         if what == "insert" :
             if request.method == 'POST':
@@ -81,6 +83,7 @@ def user_forms(request, what, page, entry=None):
             print("remove")
         break
 
+    #Organizer insert&delete forms
     while page == "Organizer":
         if what == "insert" :
             if request.method == 'POST':
@@ -101,6 +104,7 @@ def user_forms(request, what, page, entry=None):
             print("remove")
         break
 
+    #Competition insert&update forms
     while page == "Competition":
         if what == "insert" :
             if request.method == 'POST':
@@ -121,15 +125,24 @@ def user_forms(request, what, page, entry=None):
             print("remove")
         break
 
-    while page == "Userentry":
+    #entries insert&update formss
+    while page == "usentry":
         if what == "insert" :
+            f_entry= get_object_or_404(Flower, pk=entry)
             if request.method == 'POST':
                 f_form = Insertflower(request.POST) #data submitted(POST request)
                 if f_form.is_valid():
                     f_form.save() #inserts to db if valid
-                    return redirect('entries', entry=entry)
+                    return redirect(reverse('entries', kwargs={'entry' : entry}))
         elif what == "update":
-            print("update")
+            f_entry= get_object_or_404(Flower, pk=entry)
+            if request.method == 'POST':
+                f_form = Insertflower(request.POST, instance=f_entry)
+                if f_form.is_valid():
+                    f_form.save()
+                return redirect('user')  # Redirect to the entries page after updating
+            else:
+                f_form = Insertflower(instance=f_entry)
         elif what == "remove":
             print("remove")
         break
@@ -197,17 +210,6 @@ def delete_object(request, obj_type, obj_id):
 def confirm_delete_user(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'confirm_delete_user.html', {'user': user})
-
-def update_entry(request, entry_id):
-    entry = get_object_or_404(Flower, pk=entry_id)
-    if request.method == 'POST':
-        form = FlowerUpdateForm(request.POST, instance=entry)
-        if form.is_valid():
-            form.save()
-            return redirect('user')  # Redirect to the entries page after updating
-    else:
-        form = FlowerUpdateForm(instance=entry)
-    return render(request, 'update_entry.html', {'form': form})
 
 def pflowers(request):
     if request.method == 'POST':

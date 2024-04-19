@@ -62,7 +62,16 @@
                 <button type="submit">Update</button>
             </form>
         </div>
-    {% elif what == "insert" and page == "Userentry" %}
+    {% elif what == "insert" and page == "usentry" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{flowerform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    {% elif what == "update" and page == "usentry" %}
         
         <div>
             <form method="POST">

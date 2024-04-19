@@ -1,9 +1,0 @@
-{% extends 'home.html' %}
-{% block content %}
-  <h1>Update Entry</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Update</button>
-  </form>
-{% endblock %}
