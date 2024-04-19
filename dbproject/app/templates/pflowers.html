@@ -23,10 +23,23 @@
 <!-- Display recommendations if available -->
 {% if recommendations %}
     <h2>Recommendations based on color similarity:</h2>
-    <ul>
-        {% for flower, similarity in recommendations %}
-            <li>{{ flower.species }} ({{ flower.color }}) - Similarity: {{ similarity }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Species</th>
+                <th>Color</th>
+                <th>Similarity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for flower, similarity in recommendations %}
+            <tr>
+                <td>{{ flower.species }}</td>
+                <td>{{ flower.color }}</td>
+                <td>{{ similarity }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endif %}
 {% endblock %}
