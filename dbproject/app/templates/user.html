@@ -2,7 +2,10 @@
 <!--extends home template-->
 
 {% block content %}
-<h1>Search page</h1>
+<h1>Search page
+    <p>Total Entries: {{ entry_count }}</p>  <!-- Display the entry count -->
+    <p>Total Users: {{ user_count }}</p>
+</h1>
 <div>
 
     <!--sends GET to view if enter info-->

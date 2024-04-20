@@ -9,10 +9,23 @@ import random
 
 # Home view
 def home(request):
-    return render(request,"home.html") #render home url
+    # Query the database to find the three largest and three smallest plants based on size
+    
+
+    largest_plants = Flower.objects.exclude(size=None).order_by('-size')[:3]
+    smallest_plants = Flower.objects.exclude(size=None).order_by('size')[:3]
+    
+    context = {
+        
+        'largest_plants': largest_plants,
+        'smallest_plants': smallest_plants
+    }
+    return render(request, "home.html", context=context)
 
 
 def user(request):
+    user_count = User.objects.count()
+    entry_count = Flower.objects.count()
     u_info = User.objects.all() #creates user queryset(qs) 
     f_info = Flower.objects.all() #creates flower qs
 
@@ -20,7 +33,10 @@ def user(request):
 
     u_info = the_filter.qs #filtered qs from GET request
 
-    context = {'users' : u_info, 
+    context = {
+            'entry_count': entry_count,
+             'user_count': user_count,
+                'users' : u_info, 
                'flowers' : f_info, 
                'filter' : the_filter} #key/value to return(dictionary)
     return render(request,"user.html",context)
