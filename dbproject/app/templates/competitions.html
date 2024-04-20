@@ -26,6 +26,10 @@
         <th>Location</th>
         <th>Competition Date&Time</th>
         <th>Participants</th>
+        <th></th>
+        <th></th>
+        <th><h5>Perennials</h5></th>
+        <th><h5>Annuals</h5></th>
         {% for competition in competitions %}
         <tr>
             <td>{{competition.c_id}}</td>
@@ -37,6 +41,8 @@
             <td><button>
                 <a href="{% url 'delete_object' obj_type='competition' obj_id=competition.c_id %}">Remove</a>
             </button></td>
+            <td><button><a href="{% url 'subclass' pora='perennial' id=competition.c_id %}">{{competition.perennials_set.count}}</a></button></td>
+            <td><button><a href="{% url 'subclass' pora='annual' id=competition.c_id %}">{{competition.annuals_set.count}}</a></button></td>
         </tr>
         {% endfor %}
         

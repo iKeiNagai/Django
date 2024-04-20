@@ -50,7 +50,8 @@ class Competition(models.Model):
 
 #perennials table
 class Perennials(models.Model):
-    perennial = models.OneToOneField(Competition, models.DO_NOTHING, primary_key=True)
+    perennial_id = models.AutoField(primary_key=True)
+    comp = models.ForeignKey(Competition, models.DO_NOTHING, db_column='comp')
     perennials = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
@@ -59,8 +60,9 @@ class Perennials(models.Model):
 
 #annuals table
 class Annuals(models.Model):
-    annual = models.OneToOneField('Competition', models.DO_NOTHING, primary_key=True)
-    cosmos = models.CharField(max_length=30, blank=True, null=True)
+    annual_id = models.AutoField(primary_key=True)
+    comp = models.ForeignKey('Competition', models.DO_NOTHING, db_column='comp')
+    annuals = models.CharField(max_length=30, blank=True, null=True)
 
     class Meta:
         managed = False

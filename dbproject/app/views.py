@@ -3,20 +3,17 @@ from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
 from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
-from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter
+from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter, annualsFilter, perennialFilter
 from fuzzywuzzy import fuzz
 import random
 
 # Home view
 def home(request):
     # Query the database to find the three largest and three smallest plants based on size
-    
-
     largest_plants = Flower.objects.exclude(size=None).order_by('-size')[:3]
     smallest_plants = Flower.objects.exclude(size=None).order_by('size')[:3]
-    
-    context = {
-        
+
+    context = { 
         'largest_plants': largest_plants,
         'smallest_plants': smallest_plants
     }
@@ -50,6 +47,25 @@ def entries(request, entry):
                'filter' : f_filter,
                'entry' : entry}
     return render(request, 'entries.html', context)
+
+def subclass(request, pora, id=None):
+
+    p_info = Perennials.objects.filter(comp=id)
+    a_info = Annuals.objects.filter(comp=id)
+
+    if pora == "perennial":
+        the_filter = perennialFilter(request.GET, queryset=p_info)
+        p_info = the_filter.qs
+
+    if pora == "annual":
+        the_filter = annualsFilter(request.GET, queryset=a_info)
+        a_info = the_filter.qs
+
+    context={'perennials': p_info,
+             'annuals' : a_info,
+             'perorann' : pora,
+             'filter' : the_filter}
+    return render(request, "subclass.html", context)
 
 def organizers(request):
     o_info = Organizers.objects.all() #creates organizers qs

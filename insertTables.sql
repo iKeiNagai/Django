@@ -75,7 +75,7 @@ INSERT INTO Perennials(comp, perennials) VALUES
 
 
 
-INSERT INTO annuals(comp,cosmos) VALUES 
+INSERT INTO annuals(comp,annuals) VALUES 
 (2,'Begonia'),
 (2,'Geranium'),
 (2,'Petunia'),

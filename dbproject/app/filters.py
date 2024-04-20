@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import CharFilter, NumberFilter, ChoiceFilter
-from .models import User, Organizers, Competition, Flower
+from .models import User, Organizers, Competition, Flower, Perennials, Annuals
 
 class thefilter(django_filters.FilterSet) : #filter querysets
 
@@ -37,3 +37,15 @@ class entriesFilter(django_filters.FilterSet):
         model = Flower
         fields = ['species',
                   'color']
+        
+class perennialFilter(django_filters.FilterSet):
+    perennials = CharFilter(field_name='perennials', lookup_expr='icontains', label='Perennial Name')
+    class Meta:
+        model = Perennials
+        fields = ['perennials']
+
+class annualsFilter(django_filters.FilterSet):
+    annuals = CharFilter(field_name='annuals', lookup_expr='icontains', label='Annual Name')
+    class Meta:
+        model = Annuals
+        fields = ['annuals']

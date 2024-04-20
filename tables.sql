@@ -42,7 +42,7 @@ FOREIGN KEY(u_id) REFERENCES User(u_id)
 CREATE TABLE Annuals(
 annual_id INT AUTO_INCREMENT,
 comp INT NOT NULL,
-cosmos VARCHAR(30),
+annuals VARCHAR(30),
 PRIMARY KEY(annual_id),
 FOREIGN KEY(comp) REFERENCES competition(c_id)
     ON DELETE CASCADE

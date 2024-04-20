@@ -1,0 +1,58 @@
+{% extends 'home.html' %}
+<!--extends home template-->
+{% block content %}
+
+    {% if perorann == "perennial" %}
+    <h1>perennial</h1>
+    <div>
+        <form method="GET" >
+            {{filter.form}} 
+            <button type="submit"> Search </button>
+        </form>
+        
+    </div>
+    <div>
+        <table>
+            {% for perennial in perennials %}
+            <tr>
+                <td>{{perennial.perennial_id}}</td>
+                <td>{{perennial.perennials}}</td>
+                <td><button>
+                    <a href="">Update</a>
+                </button></td>
+                <td><button>
+                    <a href="">Remove</a>
+                </button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    {% elif perorann == "annual" %}
+    <h1>annuals</h1>
+    <div>
+        <form method="GET" >
+            {{filter.form}} 
+            <button type="submit"> Search </button>
+        </form>
+        
+    </div>
+    <div>
+        <table>
+            {% for annual in annuals %}
+            <tr>
+                <td>{{annual.annual_id}}</td>
+                <td>{{annual.annuals}}</td>
+                <td><button>
+                    <a href="">Update</a>
+                </button></td>
+                <td><button>
+                    <a href="">Remove</a>
+                </button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+{% endblock %}
