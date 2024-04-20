@@ -13,7 +13,7 @@
     
 </div>
 <div>
-    <button><a href="{% url 'userforms' page='Organizer' what='insert' %}">Insert+</a> +</button>
+    <button><a href="{% url 'userforms' page='Organizer' what='insert' entry=0 %}">Insert+</a> +</button>
 </div>
 <div>
     <table>
@@ -27,7 +27,7 @@
             <td>{{organizer.o_name}}</td>
             <td>{{organizer.specialty}}</td>
             <td><button>
-                <a href="{% url 'update_organizer' o_id=organizer.o_id %}">Update<a/>
+                <a href="{% url 'userforms' page='Organizer' what='update' entry=organizer.o_id %}">Update</a>
             </button></td>
             <td><button>
                 <a href="{% url 'delete_object' obj_type='organizers' obj_id=organizer.o_id %}">Remove</a>

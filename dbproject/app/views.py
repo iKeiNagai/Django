@@ -1,17 +1,31 @@
 from django.http import HttpResponse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import CompetitionUpdateForm, FlowerUpdateForm, Insertflower, Insertuser, Insertcompetition, OrganizerUpdateForm, UserUpdateForm, randc, InsertOrganizer
+from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
 from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter
 from fuzzywuzzy import fuzz
 import random
 
 # Home view
 def home(request):
-    return render(request,"home.html") #render home url
+    # Query the database to find the three largest and three smallest plants based on size
+    
+
+    largest_plants = Flower.objects.exclude(size=None).order_by('-size')[:3]
+    smallest_plants = Flower.objects.exclude(size=None).order_by('size')[:3]
+    
+    context = {
+        
+        'largest_plants': largest_plants,
+        'smallest_plants': smallest_plants
+    }
+    return render(request, "home.html", context=context)
 
 
 def user(request):
+    user_count = User.objects.count()
+    entry_count = Flower.objects.count()
     u_info = User.objects.all() #creates user queryset(qs) 
     f_info = Flower.objects.all() #creates flower qs
 
@@ -19,7 +33,10 @@ def user(request):
 
     u_info = the_filter.qs #filtered qs from GET request
 
-    context = {'users' : u_info, 
+    context = {
+            'entry_count': entry_count,
+             'user_count': user_count,
+                'users' : u_info, 
                'flowers' : f_info, 
                'filter' : the_filter} #key/value to return(dictionary)
     return render(request,"user.html",context)
@@ -31,7 +48,7 @@ def entries(request, entry):
     u_entry = f_filter.qs
     context = {'entries' : u_entry,
                'filter' : f_filter,
-               'entry': entry}
+               'entry' : entry}
     return render(request, 'entries.html', context)
 
 def organizers(request):
@@ -61,6 +78,7 @@ def user_forms(request, what, page, entry=None):
     c_form = Insertcompetition()
     f_form = Insertflower()
 
+    #User insert&update forms
     while page == "User":
         if what == "insert" :
             if request.method == 'POST':
@@ -69,11 +87,19 @@ def user_forms(request, what, page, entry=None):
                     u_form.save() #inserts to db if valid
                     return redirect('user')
         elif what == "update":
-            print("update")
+            user = get_object_or_404(User, pk=entry)
+            if request.method == 'POST':
+                u_form = Insertuser(request.POST, instance=user)
+                if u_form.is_valid():
+                    u_form.save()
+                return redirect('user')
+            else:
+                u_form = Insertuser(instance=user)
         elif what == "remove":
             print("remove")
         break
 
+    #Organizer insert&delete forms
     while page == "Organizer":
         if what == "insert" :
             if request.method == 'POST':
@@ -82,11 +108,19 @@ def user_forms(request, what, page, entry=None):
                     o_form.save() #inserts to db if valid
                     return redirect('organizers')
         elif what == "update":
-            print("update")
+            organizer = get_object_or_404(Organizers, pk=entry)
+            if request.method == 'POST':
+                o_form = InsertOrganizer(request.POST, instance=organizer)
+                if o_form.is_valid():
+                    o_form.save()
+                return redirect('organizers')
+            else:
+                o_form = InsertOrganizer(instance=organizer)
         elif what == "remove":
             print("remove")
         break
 
+    #Competition insert&update forms
     while page == "Competition":
         if what == "insert" :
             if request.method == 'POST':
@@ -95,20 +129,36 @@ def user_forms(request, what, page, entry=None):
                     c_form.save() #inserts to db if valid
                     return redirect('competitions')
         elif what == "update":
-            print("update")
+            competition = get_object_or_404(Competition, pk=entry)
+            if request.method == 'POST':
+                c_form = Insertcompetition(request.POST, instance=competition)
+                if c_form.is_valid():
+                    c_form.save()
+                return redirect('competitions')
+            else:
+                c_form = Insertcompetition(instance=competition)
         elif what == "remove":
             print("remove")
         break
 
-    while page == "Userentry":
+    #entries insert&update formss
+    while page == "usentry":
         if what == "insert" :
+            f_entry= get_object_or_404(Flower, pk=entry)
             if request.method == 'POST':
                 f_form = Insertflower(request.POST) #data submitted(POST request)
                 if f_form.is_valid():
                     f_form.save() #inserts to db if valid
-                    return redirect('entries', entry=entry)
+                    return redirect(reverse('entries', kwargs={'entry' : entry}))
         elif what == "update":
-            print("update")
+            f_entry= get_object_or_404(Flower, pk=entry)
+            if request.method == 'POST':
+                f_form = Insertflower(request.POST, instance=f_entry)
+                if f_form.is_valid():
+                    f_form.save()
+                return redirect('user')  # Redirect to the entries page after updating
+            else:
+                f_form = Insertflower(instance=f_entry)
         elif what == "remove":
             print("remove")
         break
@@ -120,9 +170,6 @@ def user_forms(request, what, page, entry=None):
                'what': what,
                'page':page}
     return render(request,'insert.html',context)
-
-def pflowers(request):
-    return render(request,"pflowers.html")
 
 def randcomp(request) :
     form = randc()
@@ -179,50 +226,6 @@ def delete_object(request, obj_type, obj_id):
 def confirm_delete_user(request, user_id):
     user = get_object_or_404(User, pk=user_id)
     return render(request, 'confirm_delete_user.html', {'user': user})
-
-def update_user(request, u_id):
-    user = get_object_or_404(User, pk=u_id)
-    if request.method == 'POST':
-        form = UserUpdateForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('user')
-    else:
-        form = UserUpdateForm(instance=user)
-    return render(request, 'update_user.html', {'form': form})
-
-def update_organizer(request, o_id):
-    organizer = get_object_or_404(Organizers, pk=o_id)
-    if request.method == 'POST':
-        form = OrganizerUpdateForm(request.POST, instance=organizer)
-        if form.is_valid():
-            form.save()
-            return redirect('organizers')
-    else:
-        form = OrganizerUpdateForm(instance=organizer)
-    return render(request, 'update_organizer.html', {'form': form})
-
-def update_competition(request, c_id):
-    competition = get_object_or_404(Competition, pk=c_id)
-    if request.method == 'POST':
-        form = CompetitionUpdateForm(request.POST, instance=competition)
-        if form.is_valid():
-            form.save()
-            return redirect('competitions')
-    else:
-        form = CompetitionUpdateForm(instance=competition)
-    return render(request, 'update_competition.html', {'form': form})
-
-def update_entry(request, entry_id):
-    entry = get_object_or_404(Flower, pk=entry_id)
-    if request.method == 'POST':
-        form = FlowerUpdateForm(request.POST, instance=entry)
-        if form.is_valid():
-            form.save()
-            return redirect('user')  # Redirect to the entries page after updating
-    else:
-        form = FlowerUpdateForm(instance=entry)
-    return render(request, 'update_entry.html', {'form': form})
 
 def pflowers(request):
     if request.method == 'POST':

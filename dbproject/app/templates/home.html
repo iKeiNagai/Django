@@ -2,32 +2,75 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <link rel="shortcut icon" href=""/>
-        <title> FLOWERS PAGE</title>
-        <link rel="stylesheet" href="{% static 'home.css' %}"> <!--searches the static folder for the file-->
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href=""/>
+    <title> FLOWERS PAGE</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}"> <!--searches the static folder for the file-->
+</head>
+<body>
         
-        <div class="header">
-            <h3>Horticultural Competition</h3>
-            <ul>
-                <!--urls from urls.py-->
-                <a href="{% url 'organizers' %}"><li>Organizers</li></a>
-                <a href="{% url 'user' %}"><li>Participants</li></a>
-                <a href="{% url 'competitions' %}"><li>Competitions</li></a>
-                <a href="{% url 'pflowers' %}"><li>Flower Recommendations</li></a>
-                <a href="{% url 'home' %}"><li>Logout</li></a>
-            </ul>
-        </div>
+    <div class="header">
+        <h3>Horticultural Competition</h3>
+        <ul>
+            <!--urls from urls.py-->
+            <a href="{% url 'organizers' %}"><li>Organizers</li></a>
+            <a href="{% url 'user' %}"><li>Participants</li></a>
+            <a href="{% url 'competitions' %}"><li>Competitions</li></a>
+            <a href="{% url 'pflowers' %}"><li>Flower Recommendations</li></a>
+        </ul>
+    </div>
         
-        <div>
-            <!--Block when u extend this home file-->
-            {% block content%}
-            Home page(advance function) 
-            {% endblock %}
-        </div>
+    <div>
+        <!--Block when u extend this home file-->
+        {% block content%}
+        <h1>Welcome to horticulture application!</h1>
+         
+        Here you can choose between checking the tabs up top, 'Organizers', 'Participants', and 'Competitions',
+        which will allow you to select a table to alter. You can also select the Flower Recommendations tab to
+        choose a new flower to grow based on color! We hope you enjoy!
+
+        <h2>Three Largest Plants:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Species</th>
+                    <th>Size</th>
+                    <th>Submitted By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in largest_plants %}
+                    <tr>
+                        <td>{{ plant.species }}</td>
+                        <td>{{ plant.size }}</td>
+                        <td>{{ plant.u.u_name }}</td>  <!-- Assuming u_name is the field representing the user's name -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+        <h2>Three Smallest Plants:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Species</th>
+                    <th>Size</th>
+                    <th>Submitted By</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for plant in smallest_plants %}
+                    <tr>
+                        <td>{{ plant.species }}</td>
+                        <td>{{ plant.size }}</td>
+                        <td>{{ plant.u.u_name }}</td>  <!-- Assuming u_name is the field representing the user's name -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endblock %}
+    </div>
        
         <div class="footer"> 
            Webpage by 

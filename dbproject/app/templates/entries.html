@@ -11,7 +11,7 @@
     
 </div>
 <div>
-    <button><a href="{% url 'aform' page='Userentry' entry=entry what='insert' %}">Insert+</a> +</button>
+    <button><a href="{% url 'aform' entry=entry what='insert' page='usentry' %}">Insert+</a> +</button>
 </div>
 <div>
     <table>
@@ -23,7 +23,7 @@
             <td>{{entry.color}}</td>
             <td>{{entry.age}}</td>
             <td><button>
-                <a href="{% url 'update_entry' entry_id=entry.f_id %}">Update</a>
+                <a href="{% url 'aform' entry=entry.f_id what='update' page='usentry' %}">Update</a>
             </button></td>
             <td><button>
                 <a href="{% url 'delete_object' obj_type='entries' obj_id=entry.f_id %}">Remove</a>
