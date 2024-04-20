@@ -2,7 +2,6 @@ CREATE DATABASE APP;
 
 USE APP;
 
-
 CREATE TABLE Organizers(
 o_id INT AUTO_INCREMENT,
 o_name VARCHAR(30),
@@ -29,7 +28,7 @@ PRIMARY KEY(u_id)
 
 CREATE TABLE Flower(
 f_id INT AUTO_INCREMENT,
-u_id INT,
+u_id INT NOT NULL,
 species VARCHAR(30),
 size FLOAT,
 color VARCHAR(10),
@@ -41,8 +40,8 @@ FOREIGN KEY(u_id) REFERENCES User(u_id)
 );
 
 CREATE TABLE Annuals(
-annual_id INT auto_increment,
-comp INT,
+annual_id INT AUTO_INCREMENT,
+comp INT NOT NULL,
 cosmos VARCHAR(30),
 PRIMARY KEY(annual_id),
 FOREIGN KEY(comp) REFERENCES competition(c_id)
@@ -52,7 +51,7 @@ FOREIGN KEY(comp) REFERENCES competition(c_id)
 
 CREATE TABLE Perennials(
 perennial_id INT AUTO_INCREMENT,
-comp INT,
+comp INT NOT NULL,
 perennials VARCHAR(30),
 PRIMARY KEY(perennial_id),
 FOREIGN KEY(comp) REFERENCES competition(c_id)
@@ -62,8 +61,8 @@ FOREIGN KEY(comp) REFERENCES competition(c_id)
 
 
 CREATE TABLE Creates(
-o_id INT,
-c_id INT,
+o_id INT NOT NULL,
+c_id INT NOT NULL,
 PRIMARY KEY(o_id),
 FOREIGN KEY(o_id) REFERENCES Organizers(o_id)
     ON DELETE CASCADE
@@ -74,8 +73,8 @@ FOREIGN KEY (c_id) REFERENCES Competition(c_id)
 );
 
 CREATE TABLE Participates(
-f_id INT,
-c_id INT,
+f_id INT NOT NULL,
+c_id INT NOT NULL,
 PRIMARY KEY(f_id,c_id),
 FOREIGN KEY(f_id) REFERENCES Flower(f_id)
     ON DELETE CASCADE
@@ -86,8 +85,8 @@ FOREIGN KEY(c_id) REFERENCES Competition(c_id)
 );
 
 CREATE TABLE has(
-u_id INT,
-c_id INT,
+u_id INT NOT NULL,
+c_id INT NOT NULL,
 PRIMARY KEY(u_id,c_id),
 FOREIGN KEY(u_id) REFERENCES User(u_id)
     ON DELETE CASCADE
