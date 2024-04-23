@@ -251,7 +251,7 @@ def randcomp(request) :
 
             for item in rand_items:
                 for i in range(len(top_three)):
-                    if top_three[i] is None or item.entriesno>top_three[i].entriesno:
+                    if top_three[i] is None or item.entriesNo>top_three[i].entriesNo:
                         top_three.insert(i, item)
                         top_three.pop()
                         break

@@ -2,41 +2,58 @@
 
 {% block content %}
 
-<h4>RANDOM COMP</h4>
+<div class="text2">
+    <h4>RANDOM COMPETITION</h4>
+</div>
 <div>
     <form method="GET">
+        <div class="fifth">
         {% csrf_token %}
         {{randc.as_p}}
         <p>No more than {{len}}</p>
         <button type="submit">submit</button>
+        </div>
     </form>
 </div>
-<h1>{{compname}}</h1>
 
-<div>
-    <h3>Winners</h3>
-    <table>
-    {%  for i in winners %}
-        <tr>
-        <td>{{i.u_id}}</td>
-        <td>{{i.u_name}}</td>
-        <td>{{i.u_address}}</td>
-        </tr>
-    {% endfor %}
-    </table>
-</div>
-<div></div>
-<div>
-    <h3>participants</h3>
-    <table>
-    {%  for i in rand_items %}
-        <tr>
-        <td>{{i.u_id}}</td>
-        <td>{{i.u_name}}</td>
-        <td>{{i.u_address}}</td>
-        </tr>
-    {% endfor %}
-    </table>
-</div>
+
+{% if rand_items %}
+    <div class="text2">
+        <h1>{{compname}}</h1>
+    </div>
+
+    <div>
+        <div class="text2">
+        <h3>Winners</h3>
+        </div>
+        
+        <div class="tableees">
+        <table>
+        {%  for i in winners %}
+            <tr>
+            <td>{{i.u_id}}</td>
+            <td>{{i.u_name}}</td>
+            <td>{{i.u_address}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+        
+        <div class="text2">
+        <h3>participants</h3>
+        </div>
+
+        <div class="tableees">
+        <table>
+        {%  for i in rand_items %}
+            <tr>
+            <td>{{i.u_id}}</td>
+            <td>{{i.u_name}}</td>
+            <td>{{i.u_address}}</td>
+            </tr>
+        {% endfor %}
+        </table>
+        </div>
+{% endif %}
 
 {% endblock %}
