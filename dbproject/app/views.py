@@ -267,13 +267,18 @@ def randcomp(request) :
 
 def delete_object(request, obj_type, obj_id):
     if obj_type == 'user':
-        obj = get_object_or_404(User, pk=obj_id)
+        obj = get_object_or_404(User, pk=obj_id) # Handle deletion of user
     elif obj_type == 'organizers':
-        obj = get_object_or_404(Organizers, pk=obj_id)
+        obj = get_object_or_404(Organizers, pk=obj_id) # Handle deletion of competition
     elif obj_type == 'competition':
         obj = get_object_or_404(Competition, pk=obj_id)
     elif obj_type == 'entries':  # Handle deletion of entries
         obj = get_object_or_404(Flower, pk=obj_id)
+    elif obj_type == 'annuals':  # Handle deletion of annuals
+        obj = get_object_or_404(Annuals, pk=obj_id)
+    elif obj_type == 'perennials':  # Handle deletion of perennials
+        obj = get_object_or_404(Perennials, pk=obj_id)
+    
     else:
         # Handle invalid object type
         return HttpResponse("Invalid object type")
@@ -283,6 +288,10 @@ def delete_object(request, obj_type, obj_id):
         obj.delete()
         if (obj_type=='entries'):
             return redirect('user')
+        elif (obj_type == 'annuals'):
+            return redirect('competitions')
+        elif (obj_type == 'perennials'):
+            return redirect('competitions')
         else:
          return redirect(obj_type)  # Redirect to appropriate page after deletion
 

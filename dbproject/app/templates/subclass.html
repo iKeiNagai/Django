@@ -26,7 +26,7 @@
                     <a href="{% url 'asubform' pora=perorann id=perennial.perennial_id what='update' %}">Update</a>
                 </button></td>
                 <td><button>
-                    <a href="">Remove</a>
+                    <a href="{% url 'delete_object' obj_type='perennials' obj_id=perennial.perennial_id %}">Remove</a>
                 </button></td>
             </tr>
             {% endfor %}
@@ -59,7 +59,7 @@
                     <a href="{% url 'asubform' pora=perorann id=annual.annual_id what='update' %}">Update</a>
                 </button></td>
                 <td><button>
-                    <a href="">Remove</a>
+                    <a href="{% url 'delete_object' obj_type='annuals' obj_id=annual.annual_id %}">Remove</a>
                 </button></td>
             </tr>
             {% endfor %}
