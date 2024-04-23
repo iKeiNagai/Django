@@ -4,14 +4,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href=""/>
+    <link rel="shortcut icon" href="{% static 'hort.ico' %}"/>
     <title> FLOWERS PAGE</title>
     <link rel="stylesheet" href="{% static 'home.css' %}"> <!--searches the static folder for the file-->
 </head>
 <body>
         
     <div class="header">
-        <h3><a href="{% url 'home' %}">Horticultural Competition</a></h3>
+        <a href="{% url 'home' %}"><img src="{% static 'hort.png' %}"><h3>Horticulture Competition</a></h3>
         <ul>
             <!--urls from urls.py-->
             <a href="{% url 'organizers' %}"><li>Organizers</li></a>
@@ -30,6 +30,9 @@
         Here you can choose between checking the tabs up top, 'Organizers', 'Participants', and 'Competitions',
         which will allow you to select a table to alter. You can also select the Flower Recommendations tab to
         choose a new flower to grow based on color! We hope you enjoy!
+        </div>
+        <div class="container_img">
+        <img class="imageee" src="{% static 'blob.jpg' %}">
         </div>
     
     </div>

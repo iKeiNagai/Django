@@ -69,24 +69,30 @@ def subclass(request, pora, id=None):
     return render(request, "subclass.html", context)
 
 def organizers(request):
+    organizer_count = Organizers.objects.count()
     o_info = Organizers.objects.all() #creates organizers qs
     o_filter = OrganizersFilter(request.GET, queryset=o_info)
 
     o_info = o_filter.qs
     context = {'organizers' : o_info,
-               'filter' : o_filter} #key/value to return(dictionary)
+               'filter' : o_filter,
+               'organizer_count': organizer_count} #key/value to return(dictionary)
     return render(request,"organizers.html",context)
 
 def competitions(request):
-    inserted = False
-
+    comp_count = Competition.objects.count()
+    pere_count = Perennials.objects.count()
+    annu_count = Annuals.objects.count()
     c_info = Competition.objects.all()
     c_filter = CompetitionsFilter(request.GET, queryset=c_info)
     c_info = c_filter.qs
     #create form objects
         
     context = { 'filter': c_filter,
-               'competitions' : c_info} #key/value to return(dictionary)
+               'competitions' : c_info,
+               'comp_count' : comp_count,
+               'pere_count' : pere_count,
+               'annu_count' : annu_count} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
 def user_forms(request, what, page=None, entry=None, pora=None, id=None):

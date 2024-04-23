@@ -44,6 +44,16 @@
     color: white;
 }
 
+.imageee{
+    flex: 0 0 auto;
+}
+
+.container_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+  }
+  
 .tableees{
     background-color: rgb(137, 197, 172);
     display: flex;
