@@ -4,7 +4,7 @@
 
     {% if what == "insert" and page == "User"%}
     
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{userform.as_p}}
@@ -14,7 +14,7 @@
 
     {% elif what == "update" and page == "User" %}
         <h1>Update User</h1>
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{ userform.as_p }}
@@ -25,7 +25,7 @@
 
     {% elif what == "insert" and page == "Organizer" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{organizerform.as_p}}
@@ -35,7 +35,7 @@
     
     {% elif what == "update" and page == "Organizer" %}
         <h1>Update Organizer</h1>
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{ organizerform.as_p }}
@@ -45,7 +45,7 @@
 
     {% elif what == "insert" and page == "Competition" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{competitionform.as_p}}
@@ -55,7 +55,7 @@
     
     {% elif what == "update" and page == "Competition" %}
         <h1>Update Competition</h1>
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{ competitionform.as_p }}
@@ -64,7 +64,7 @@
         </div>
     {% elif what == "insert" and page == "usentry" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{flowerform.as_p}}
@@ -73,7 +73,7 @@
         </div>
     {% elif what == "update" and page == "usentry" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{flowerform.as_p}}
@@ -82,7 +82,7 @@
         </div>
     {% elif what == "insert" and pora == "perennial" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{perennialform.as_p}}
@@ -91,7 +91,7 @@
         </div>
     {% elif what == "update" and pora == "perennial" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{perennialform.as_p}}
@@ -100,7 +100,7 @@
         </div>
     {% elif what == "insert" and pora == "annual" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{annualform.as_p}}
@@ -109,7 +109,7 @@
         </div>
     {% elif what == "update" and pora == "annual" %}
         
-        <div>
+        <div class="fifth">
             <form method="POST">
                 {% csrf_token %}
                 {{annualform.as_p}}
