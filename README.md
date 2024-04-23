@@ -1,5 +1,12 @@
 Horticulture app - application that assists with the organization and execution of flower competitions
 
+Basic Functions: 
+- Create, Read, Update, Delete
+
+Advance Functions:
+- Flower Recommendations(input:color)
+- Random Competition
+
 install:
 - pip install django 
 - pip install mysqlclient
