@@ -80,5 +80,41 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+    {% elif what == "insert" and pora == "perennial" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{perennialform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    {% elif what == "update" and pora == "perennial" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{perennialform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    {% elif what == "insert" and pora == "annual" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{annualform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    {% elif what == "update" and pora == "annual" %}
+        
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{annualform.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     {% endif %}
 {% endblock %}

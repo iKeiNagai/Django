@@ -1,5 +1,5 @@
 from django import forms
-from .models import Flower, User, Competition, Organizers
+from .models import Flower, User, Competition, Organizers, Perennials, Annuals
 
 #forms connected to models include all fields
 class Insertflower(forms.ModelForm):
@@ -48,7 +48,22 @@ class randc(forms.Form):
     PersonNo = forms.IntegerField(label="NNumber")
 
 
-class FlowerUpdateForm(forms.ModelForm):
+class InsertPerennial(forms.ModelForm):
     class Meta:
-        model = Flower
-        fields = ['species', 'size', 'color', 'age']
+        model = Perennials
+        fields = "__all__"
+        labels = {
+            'perennial_id' : 'Perennial Id',
+            'comp' : 'Competition ID',
+            'perennials' : 'Perennial Name'
+        }
+
+class InsertAnnuals(forms.ModelForm):
+    class Meta:
+        model = Annuals
+        fields = "__all__"
+        labels = {
+            'annual_id' : 'Annual Id',
+            'comp' : 'Competition ID',
+            'annuals' : 'Annual Name'
+        }

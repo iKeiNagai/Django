@@ -12,13 +12,16 @@
         
     </div>
     <div>
+        <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a> +</button>
+    </div>
+    <div>
         <table>
             {% for perennial in perennials %}
             <tr>
                 <td>{{perennial.perennial_id}}</td>
                 <td>{{perennial.perennials}}</td>
                 <td><button>
-                    <a href="">Update</a>
+                    <a href="{% url 'asubform' pora=perorann id=perennial.perennial_id what='update' %}">Update</a>
                 </button></td>
                 <td><button>
                     <a href="">Remove</a>
@@ -38,13 +41,16 @@
         
     </div>
     <div>
+        <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a> +</button>
+    </div>
+    <div>
         <table>
             {% for annual in annuals %}
             <tr>
                 <td>{{annual.annual_id}}</td>
                 <td>{{annual.annuals}}</td>
                 <td><button>
-                    <a href="">Update</a>
+                    <a href="{% url 'asubform' pora=perorann id=annual.annual_id what='update' %}">Update</a>
                 </button></td>
                 <td><button>
                     <a href="">Remove</a>

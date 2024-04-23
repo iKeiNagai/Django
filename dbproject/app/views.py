@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Organizers, Flower, User, Competition, Perennials, Annuals
-from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer
+from .Form import Insertflower, Insertuser, Insertcompetition, randc, InsertOrganizer, InsertAnnuals, InsertPerennial
 from .filters import entriesFilter, thefilter, OrganizersFilter, CompetitionsFilter, annualsFilter, perennialFilter
 from fuzzywuzzy import fuzz
 import random
@@ -64,7 +64,8 @@ def subclass(request, pora, id=None):
     context={'perennials': p_info,
              'annuals' : a_info,
              'perorann' : pora,
-             'filter' : the_filter}
+             'filter' : the_filter,
+             'theid': id}
     return render(request, "subclass.html", context)
 
 def organizers(request):
@@ -88,11 +89,13 @@ def competitions(request):
                'competitions' : c_info} #key/value to return(dictionary)
     return render(request,"competitions.html",context)
 
-def user_forms(request, what, page, entry=None):
+def user_forms(request, what, page=None, entry=None, pora=None, id=None):
     u_form = Insertuser()
     o_form = InsertOrganizer()
     c_form = Insertcompetition()
     f_form = Insertflower()
+    p_form = InsertPerennial()
+    a_form = InsertAnnuals()
 
     #User insert&update forms
     while page == "User":
@@ -178,13 +181,60 @@ def user_forms(request, what, page, entry=None):
         elif what == "remove":
             print("remove")
         break
+
+    #perennial update&insert forms   
+    while pora == "perennial":
+        if what == "insert" :
+            p_id= get_object_or_404(Perennials, pk=id)
+            if request.method == 'POST':
+                p_form = InsertPerennial(request.POST) #data submitted(POST request)
+                if p_form.is_valid():
+                    p_form.save() #inserts to db if valid
+                    return redirect(reverse('subclass', kwargs={'pora' : pora, 'id' :id}))
+        elif what == "update":
+            p_id= get_object_or_404(Perennials, pk=id)
+            if request.method == 'POST':
+                p_form = InsertPerennial(request.POST, instance=p_id)
+                if p_form.is_valid():
+                    p_form.save()
+                return redirect('competitions')  # Redirect to the entries page after updating
+            else:
+                p_form = InsertPerennial(instance=p_id)
+        elif what == "remove":
+            print("remove")
+        break
+
+    #annual update&insert forms   
+    while pora == "annual":
+        if what == "insert" :
+            a_id= get_object_or_404(Annuals, pk=id)
+            if request.method == 'POST':
+                a_form = InsertAnnuals(request.POST) #data submitted(POST request)
+                if a_form.is_valid():
+                    a_form.save() #inserts to db if valid
+                    return redirect(reverse('subclass', kwargs={'pora' : pora, 'id' :id}))
+        elif what == "update":
+            a_id= get_object_or_404(Annuals, pk=id)
+            if request.method == 'POST':
+                a_form = InsertAnnuals(request.POST, instance=a_id)
+                if a_form.is_valid():
+                    a_form.save()
+                return redirect('competitions')  # Redirect to the entries page after updating
+            else:
+                a_form = InsertAnnuals(instance=a_id)
+        elif what == "remove":
+            print("remove")
+        break
     
     context = {'userform' : u_form,
                'organizerform' : o_form,
                'competitionform' : c_form,
                'flowerform' : f_form,
+               'perennialform' : p_form,
+               'annualform' :a_form,
                'what': what,
-               'page':page}
+               'page':page,
+               'pora' : pora}
     return render(request,'insert.html',context)
 
 def randcomp(request) :
