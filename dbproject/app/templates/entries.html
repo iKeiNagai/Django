@@ -1,19 +1,22 @@
 {% extends 'home.html' %}
 <!--extends home template-->
 {% block content %}
+<div>
+    <p>Entries</p>
+</div>
 
-<h1>Entries</h1>
 <div>
     <form method="GET" >
+        <div class="fifth">
         {{filter.form}} 
         <button type="submit"> Search </button>
+        <button><a href="{% url 'aform' entry=entry what='insert' page='usentry' %}">Insert+</a></button>
+        </div>
     </form>
     
 </div>
-<div>
-    <button><a href="{% url 'aform' entry=entry what='insert' page='usentry' %}">Insert+</a> +</button>
-</div>
-<div>
+
+<div class="tableees">
     <table>
         {% for entry in entries %}
         <tr>

@@ -3,18 +3,20 @@
 {% block content %}
 
     {% if perorann == "perennial" %}
-    <h1>perennial</h1>
+    <div class="text2">
+        <p>Perennials</p>
+    </div>
     <div>
         <form method="GET" >
+            <div class="fifth">
             {{filter.form}} 
             <button type="submit"> Search </button>
+            <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a></button>
+            </div>
         </form>
         
     </div>
-    <div>
-        <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a> +</button>
-    </div>
-    <div>
+    <div class="tableees">
         <table>
             {% for perennial in perennials %}
             <tr>
@@ -32,18 +34,22 @@
     </div>
 
     {% elif perorann == "annual" %}
-    <h1>annuals</h1>
+    <div class="text2">
+        <p>Annuals</p>
+    </div>
+
     <div>
         <form method="GET" >
+            <div class="fifth">
             {{filter.form}} 
             <button type="submit"> Search </button>
+            <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a></button>
+            </div>
         </form>
         
     </div>
-    <div>
-        <button><a href="{% url 'asubform' pora=perorann id=theid what='insert' %}">Insert+</a> +</button>
-    </div>
-    <div>
+
+    <div class="tableees">
         <table>
             {% for annual in annuals %}
             <tr>

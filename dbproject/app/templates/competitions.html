@@ -2,24 +2,24 @@
 <!--extends home template-->
 {% block content %}
 
-<h1>Competitions</h1>
+<div class="text2">
+    <p>Competitions</p>
+    <p>Total Competitions:</p>
+</div>
 
 <div>
-
     <!--sends GET to view if enter info-->
     <form method="GET" >
+        <div class="fifth">
         {{filter.form}} <!--create filter from context in view(return)-->
         <button type="submit"> Search </button>
+        <button><a href="{% url 'userforms' page='Competition' what='insert' entry=0 %}">Insert +</a></button>
+        <button><a href="{% url 'randcomp' %}">Random</a></button>
+        </div>
     </form>
-    
 </div>
-<div>
-    <button><h3><a href="{% url 'randcomp' %}"> Random competition</a></h3></button>
-</div>
-<div>
-    <button><a href="{% url 'userforms' page='Competition' what='insert' entry=0 %}">Insert +</a></button>
-</div>
-<div>
+
+<div class="tableees">
     <table>
         <th>Id</th>
         <th>Name</th>

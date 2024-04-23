@@ -2,20 +2,23 @@
 <!--extends home template-->
 {% block content %}
 
-<h1>Organizers page</h1>
-<div>
+<div class="text2">
+    <p>Organizers page</p>
+    <p>Total Organizers: </p>
+</div>
 
+<div>
     <!--sends GET to view if enter info-->
     <form method="GET" >
+        <div class="fifth">
         {{filter.form}} <!--create filter from context in view(return)-->
         <button type="submit"> Search </button>
-    </form>
-    
+        <button><a href="{% url 'userforms' page='Organizer' what='insert' entry=0 %}">Insert+</a></button>
+        </div>
+    </form> 
 </div>
-<div>
-    <button><a href="{% url 'userforms' page='Organizer' what='insert' entry=0 %}">Insert+</a> +</button>
-</div>
-<div>
+
+<div class="tableees">
     <table>
         <th>Id</th>
         <th>Name</th>

@@ -2,27 +2,31 @@
 <!--extends home template-->
 
 {% block content %}
-<h1>Search page
+<div class="text2">
+    <p>Search page</p>
     <p>Total Entries: {{ entry_count }}</p>  <!-- Display the entry count -->
     <p>Total Users: {{ user_count }}</p>
-</h1>
-<div>
+</div>
 
+<div>
     <!--sends GET to view if enter info-->
     <form method="GET" >
+        <div class="fifth">
         {{filter.form}} <!--create filter from context in view(return)-->
         <button type="submit"> Search </button>
+        <button><a href="{% url 'userforms' page='User' what='insert' entry=0 %}">Insert +</a></button>
+        </div>
     </form>
     
 </div>
-<div>
-    <button><a href="{% url 'userforms' page='User' what='insert' entry=0 %}">Insert +</a></button>
-</div>
-<div>
+    
+
+<div class="tableees">
     <table>
         <th>Id</th>
         <th>Name</th>
         <th>Address</th>
+        <th>Entries</th>
         <!--for loop, users from context in view(returns)-->
         {%for user in users%}
         <tr>
@@ -31,7 +35,7 @@
             <td>{{user.u_id}}</td>
             <td>{{user.u_name}} </td>  
             <td>{{user.u_address}}</td>
-            <td>{{user.entriesno}}</td>
+            <td>{{user.entriesNo}}</td>
             <td>
                 <button> 
                     <a href="{% url 'userforms' page='User' what='update' entry=user.u_id %}">Update</a>
