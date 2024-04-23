@@ -20,17 +20,21 @@
             <a href="{% url 'pflowers' %}"><li>Flower Recommendations</li></a>
         </ul>
     </div>
-        
-    <div>
-        <!--Block when u extend this home file-->
-        {% block content%}
-        <h1>Welcome to horticulture application!</h1>
-         
+      <!--Block when u extend this home file-->
+      {% block content%}  
+    <div class="header2">
+        <div class="text1">
+        Welcome to horticulture application!
+        </div>
+        <div class="text2">
         Here you can choose between checking the tabs up top, 'Organizers', 'Participants', and 'Competitions',
         which will allow you to select a table to alter. You can also select the Flower Recommendations tab to
         choose a new flower to grow based on color! We hope you enjoy!
-
-        <h2>Three Largest Plants:</h2>
+        </div>
+    
+    </div>
+    <div class="second">
+        <h1>Three Largest Plants:</h1>
         <table>
             <thead>
                 <tr>
@@ -50,7 +54,7 @@
             </tbody>
         </table>
             
-        <h2>Three Smallest Plants:</h2>
+        <h1>Three Smallest Plants:</h1>
         <table>
             <thead>
                 <tr>
@@ -69,9 +73,8 @@
                 {% endfor %}
             </tbody>
         </table>
-        {% endblock %}
     </div>
-       
+    {% endblock %}  
         <div class="footer"> 
            Webpage by 
         </div>
